@@ -21,9 +21,9 @@ public class CameraTrack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+        transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
 
-        LayerMask mask = LayerMask.GetMask("CameraRay");
+        /*LayerMask mask = LayerMask.GetMask("CameraRay");
         
         //Left
         RaycastHit2D left = Physics2D.Raycast(transform.position, -transform.right, max_distance, mask);
@@ -54,7 +54,7 @@ public class CameraTrack : MonoBehaviour
             Mathf.Clamp(target.position.y, y_min, y_max),
             transform.position.z
             );
-
+*/
     }
 
     private void OnDrawGizmos()
