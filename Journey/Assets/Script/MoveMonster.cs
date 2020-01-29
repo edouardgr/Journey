@@ -7,9 +7,10 @@ public class MoveMonster : MonoBehaviour
 {
     Rigidbody2D rb;
     BoxCollider2D bc;
-
+    
     public bool facing_right = true;
     public float hor, vert;
+    public Collider2D last_col;
     [Header("Controller")]
     public float deadzone = 0.5f;
     [Header("X Velocity")]
@@ -20,7 +21,7 @@ public class MoveMonster : MonoBehaviour
     [Header("Y Velocity")]
     public float fall_gravity = 3f;
     public float jump_gravity = 2f;
-    public float drop_down_time = 0.1f;
+    public float drop_down_time = 0.2f;
     public float drop_down_timer = 0f;
     Collider2D prev_oneWay;
     [Header("Jumping")]
@@ -47,7 +48,6 @@ public class MoveMonster : MonoBehaviour
             drop_down_timer -= Time.deltaTime;
             if(drop_down_timer <= 0f) {
                 Physics2D.IgnoreCollision(bc, prev_oneWay, false);
-                Debug.Log("Restore");
             }
         }
     }
@@ -79,6 +79,13 @@ public class MoveMonster : MonoBehaviour
         if (vert >= 0 && Input.GetButtonDown("Jump")) {
             extra_jump_timer = extra_jump_time;
         }
+
+        if (vert < 0 && Input.GetButtonDown("Jump") && last_col != null) {
+            Physics2D.IgnoreCollision(bc, last_col, true);
+            prev_oneWay = last_col;
+            drop_down_timer = drop_down_time;
+        }
+
         //Active jump on button
         if (extra_jump_timer > 0f && groundCheck) {
             rb.velocity = new Vector2(rb.velocity.x, jump_speed);
@@ -98,17 +105,12 @@ public class MoveMonster : MonoBehaviour
         rb.gravityScale = (rb.velocity.y > 0f ? jump_gravity : fall_gravity);
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         for(int i = 0; i < collision.contactCount; i++) {
-            Debug.Log(vert + ", " + Input.GetButtonDown("Jump") + ", " + collision.GetContact(i).collider.tag);
-            if(vert < 0 && Input.GetButtonDown("Jump") && collision.GetContact(i).collider.tag == "OneWay") {
-                Debug.Log("Dropping");
-                Physics2D.IgnoreCollision(bc, collision.GetContact(i).collider, true);
-                prev_oneWay = collision.GetContact(i).collider;
-                drop_down_timer = drop_down_time;
+            if(collision.GetContact(i).collider.tag == "OneWay") {
+                last_col = collision.GetContact(i).collider;
             }
-            //Debug.Log(collision.GetContact(i).collider.name + ": " + collision.GetContact(i).collider.GetComponent<TilemapCollider2D>().);
             //GroundCheck
             if(collision.GetContact(i).normal.y > 0f) {
                 if (!groundCheck && rb.velocity.y <= 0f) {
@@ -116,5 +118,10 @@ public class MoveMonster : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        last_col = null;
     }
 }

@@ -176,14 +176,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facing_right: 1
+  hor: 0
+  vert: 0
+  last_col: {fileID: 0}
   deadzone: 0.5
   curr_vel_x: 0
   max_vel_x: 7
-  acc_vel_x: 2
-  dec_vel_x: 3
+  acc_vel_x: 1.5
+  dec_vel_x: 1.5
   fall_gravity: 3
   jump_gravity: 2
-  on_OneWay: 0
+  drop_down_time: 0.2
+  drop_down_timer: 0
   groundCheck: 0
   jump_speed: 11
   fall_speed: 2.5
