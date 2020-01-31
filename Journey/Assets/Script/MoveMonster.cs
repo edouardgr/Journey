@@ -7,7 +7,8 @@ public class MoveMonster : MonoBehaviour
 {
     Rigidbody2D rb;
     BoxCollider2D bc;
-    
+
+    public Transform reset_point;
     public bool facing_right = true;
     public float hor, vert;
     public Collider2D last_col;
@@ -105,6 +106,11 @@ public class MoveMonster : MonoBehaviour
 
         //Set gravity
         rb.gravityScale = (rb.velocity.y > 0f ? jump_gravity : fall_gravity);
+    }
+
+    public void Respawn()
+    {
+        transform.position = reset_point.position;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
