@@ -80,10 +80,12 @@ public class MoveMonster : MonoBehaviour
             extra_jump_timer = extra_jump_time;
         }
 
+        //Drop down ledge
         if (vert < 0 && Input.GetButtonDown("Jump") && last_col != null) {
             Physics2D.IgnoreCollision(bc, last_col, true);
             prev_oneWay = last_col;
             drop_down_timer = drop_down_time;
+            groundCheck = false;
         }
 
         //Active jump on button
@@ -111,8 +113,14 @@ public class MoveMonster : MonoBehaviour
             if(collision.GetContact(i).collider.tag == "OneWay") {
                 last_col = collision.GetContact(i).collider;
             }
-            //GroundCheck
-            if(collision.GetContact(i).normal.y > 0f) {
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        //GroundCheck
+        for (int i = 0; i < collision.contactCount; i++) {
+            if (collision.GetContact(i).normal.y > 0f) {
                 if (!groundCheck && rb.velocity.y <= 0f) {
                     groundCheck = true;
                 }
