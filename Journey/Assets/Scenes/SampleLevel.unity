@@ -621,6 +621,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2142627860, guid: f6b7b47bd26844cf48390061eefc3eba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1937944947015666934, guid: f6b7b47bd26844cf48390061eefc3eba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9953,7 +9957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f77dad8044db65458f3ae25370bd268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spin_rate: 2
+  spin_rate: 4
 --- !u!4 &1157372340
 Transform:
   m_ObjectHideFlags: 0
@@ -10413,7 +10417,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

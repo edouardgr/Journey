@@ -16,11 +16,14 @@ public class LazerBehav : MonoBehaviour
         lr_down.positionCount = 2;
     }
 
+    private void FixedUpdate()
+    {
+        transform.Rotate(transform.forward, spin_rate);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(transform.forward, spin_rate);
-
         RaycastHit2D hit_up = Physics2D.Raycast(transform.position, transform.up);
         if(hit_up) {
             lr_up.SetPosition(0, transform.position);
