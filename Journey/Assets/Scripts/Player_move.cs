@@ -24,9 +24,6 @@ public class Player_move : MonoBehaviour
 
         Vector3 move = new Vector3(hor, 0, vert);
         cc.Move(move * Time.deltaTime * move_speed);
-        if (move != Vector3.zero) {
-            transform.forward = move;
-        }
     }
 
     void FixedUpdate()
