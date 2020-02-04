@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Bullet_properties : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
