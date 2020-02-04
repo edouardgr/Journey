@@ -920,6 +920,7 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1916122519 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 885657747623094026, guid: 2195c1e8d2713d149b6375f6ca0830a8,
@@ -932,10 +933,15 @@ MeshCollider:
 --- !u!114 &1758165619
 MonoBehaviour:
 >>>>>>> parent of aa85a9f... Merge branch 'master' of https://github.com/edouardgr/Journey
+=======
+--- !u!114 &1758165619
+MonoBehaviour:
+>>>>>>> parent of aa85a9f... Merge branch 'master' of https://github.com/edouardgr/Journey
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
   m_GameObject: {fileID: 1916122519}
   m_Material: {fileID: 0}
@@ -998,6 +1004,8 @@ Rigidbody:
   m_Constraints: 0
   m_CollisionDetection: 0
 =======
+=======
+>>>>>>> parent of aa85a9f... Merge branch 'master' of https://github.com/edouardgr/Journey
   m_GameObject: {fileID: 1758165614}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1006,4 +1014,7 @@ Rigidbody:
   m_EditorClassIdentifier: 
   HorizontalSpeed: 2
   VerticleSpeed: 2
+<<<<<<< HEAD
+>>>>>>> parent of aa85a9f... Merge branch 'master' of https://github.com/edouardgr/Journey
+=======
 >>>>>>> parent of aa85a9f... Merge branch 'master' of https://github.com/edouardgr/Journey
