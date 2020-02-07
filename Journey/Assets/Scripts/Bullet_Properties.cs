@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet_Properties : MonoBehaviour
 {
     //public variables 
-    public float speed = 5f;
+    public float speed = 5f;//used for how fast the bullet can travel
 
     // Update is called once per frame
     void Update()
