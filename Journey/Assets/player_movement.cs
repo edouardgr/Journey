@@ -11,6 +11,7 @@ public class player_movement : MonoBehaviour
     void Awake()
     {
         cc = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
