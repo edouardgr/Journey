@@ -5,7 +5,9 @@ using UnityEngine;
 public class player_movement : MonoBehaviour
 {
     CharacterController cc;
+    //Maximum movement speed
     public float max_speed = 5f;
+    //Vertical and Horizontal movement
     public float acc_input_x = 0.1f, acc_input_z = 0.1f;
     public float curr_input_x = 0f, curr_input_z = 0f;
 

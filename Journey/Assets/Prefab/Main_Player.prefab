@@ -61,7 +61,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HorizontalSpeed: 4
   VerticalSpeed: 4
+  pitch_limit: 80
 --- !u!114 &1582049615041966858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,9 +211,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28381d9a1288ca489bff878bea0c1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_speed: 5
-  acc_speed: 1
-  curr_speed: 0
+  max_speed: 15
+  acc_input_x: 0.1
+  acc_input_z: 0.1
+  curr_input_x: 0
+  curr_input_z: 0
 --- !u!33 &249937557912439472
 MeshFilter:
   m_ObjectHideFlags: 0
