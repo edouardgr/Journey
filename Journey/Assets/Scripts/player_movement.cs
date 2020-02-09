@@ -18,13 +18,12 @@ public class player_movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Get Horizontal and Vertical Input
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
-        
+
         //Forward movement
         if (verticalInput != 0f) {
             curr_input_z += acc_input_z * verticalInput;
@@ -48,7 +47,11 @@ public class player_movement : MonoBehaviour
             }
         }
         curr_input_x = Mathf.Clamp(curr_input_x, -1, 1);
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
         // Calculate the Direction to Move based on the tranform of the Player
         Vector3 moveDirectionForward = transform.forward * curr_input_z * max_speed;
         Vector3 moveDirectionSide = transform.right * curr_input_x * max_speed;

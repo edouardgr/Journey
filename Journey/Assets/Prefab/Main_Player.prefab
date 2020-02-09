@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max_speed: 12
-  acc_input_x: 0.1
-  acc_input_z: 0.1
+  acc_input_x: 0.2
+  acc_input_z: 0.2
   curr_input_x: 0
   curr_input_z: 0
 --- !u!33 &249937557912439472
