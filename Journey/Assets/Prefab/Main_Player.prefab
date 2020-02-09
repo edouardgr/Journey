@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 5474731150052543087}
   - component: {fileID: 5474731150052543072}
   - component: {fileID: 1582049615041966858}
+  - component: {fileID: 6511725926520545399}
   - component: {fileID: 249937557912439472}
   - component: {fileID: 6139041443895378462}
   m_Layer: 0
@@ -262,6 +263,20 @@ MonoBehaviour:
   acc_input_z: 0.2
   curr_input_x: 0
   curr_input_z: 0
+--- !u!114 &6511725926520545399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474731150052543086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867b2cdb7ad96ce42b4140ad98f939c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun_pivot: {fileID: 1836066910}
+  curr_index: 0
 --- !u!33 &249937557912439472
 MeshFilter:
   m_ObjectHideFlags: 0
