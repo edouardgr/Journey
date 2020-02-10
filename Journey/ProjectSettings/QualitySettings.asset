@@ -128,8 +128,13 @@ QualitySettings:
     shadowmaskMode: 1
     skinWeights: 2
     textureQuality: 0
+<<<<<<< Updated upstream
     anisotropicTextures: 0
     antiAliasing: 0
+=======
+    anisotropicTextures: 1
+    antiAliasing: 2
+>>>>>>> Stashed changes
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 0
