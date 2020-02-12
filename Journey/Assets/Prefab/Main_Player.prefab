@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1836066911}
   - component: {fileID: 1836066912}
+  - component: {fileID: 1448620630}
   m_Layer: 0
   m_Name: Gun_Pivot
   m_TagString: Untagged
@@ -45,6 +46,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e28b4a4ce97de34e82cbcef164ae2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1448620630
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836066910}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 38c5bedf55cbe9e47ba96efff3dd14b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &1858328407
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219561139330516239}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2ee08149f871fa64796e2cdc02f8838c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7250844511475271706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,7 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad09fcb20eeab5547aea6654f3d81cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
+  weapon_damage: 10
 --- !u!1 &5474731148536486159
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +228,7 @@ GameObject:
   - component: {fileID: 5474731150052543072}
   - component: {fileID: 1582049615041966858}
   - component: {fileID: 6511725926520545399}
+  - component: {fileID: 130294806050093417}
   - component: {fileID: 249937557912439472}
   - component: {fileID: 6139041443895378462}
   m_Layer: 0
@@ -289,7 +330,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun_pivot: {fileID: 1836066910}
-  curr_index: 0
+  curr_index: -1
+  info: {fileID: 0}
+--- !u!114 &130294806050093417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474731150052543086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c1ad9bb99e65b4c8090477bb2717c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
 --- !u!33 &249937557912439472
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -350,6 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unlocked: 0
+  weapon_damage: 10
 --- !u!1001 &1189091777998887390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -506,7 +562,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2195c1e8d2713d149b6375f6ca0830a8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2195c1e8d2713d149b6375f6ca0830a8, type: 3}

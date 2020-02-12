@@ -5,8 +5,9 @@ using UnityEngine;
 public class Weapon_Manager : MonoBehaviour
 {
     public GameObject gun_pivot; //Gun_Pivot has all the guns as its children
-    public int curr_index = 0; //Enables the selected weapon
+    public int curr_index = -1; //Enables the selected weapon
     int max_index; //Highest value the index can go to
+    public Weapon_info info = null;
     //float switch_delay = 0.5f; //Delay between switching guns, prevents quick spamming //FUTURE IDEA
 
     // Start is called before the first frame update
@@ -21,8 +22,12 @@ public class Weapon_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!gun_pivot.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //Prevents quick swapping between weapons, remove for fun
+            return;
+        }
+        
         for (int i = (int)KeyCode.Alpha1; i <= (int)KeyCode.Alpha9; i++) {
-            if (Input.GetKeyDown((KeyCode)i)) {
+            if (Input.GetKeyDown((KeyCode)i) && (i - (int)KeyCode.Alpha1) != curr_index) {
                 switch_weapon(i - (int)KeyCode.Alpha1); //Get numeric value from keyboard (1-9)
             }
         }
@@ -36,7 +41,7 @@ public class Weapon_Manager : MonoBehaviour
         }
     }
 
-    int unlocked_count() { //Return number of guns that are unlocked
+    public int unlocked_count() { //Return number of guns that are unlocked
         int count = 0;
         for(int i = 0; i < gun_pivot.transform.childCount; i++) { //Cycle through weapons
             if(gun_pivot.transform.GetChild(0).GetComponent<Weapon_info>().unlocked) { //Check if unlocked
@@ -71,5 +76,7 @@ public class Weapon_Manager : MonoBehaviour
             gun_pivot.transform.GetChild(i).gameObject.SetActive(false);
         }
         gun_pivot.transform.GetChild(curr_index).gameObject.SetActive(true); //Set the current index child to show
+        gun_pivot.GetComponent<Animator>().Play("Weapon_load", 0); //Play equiping animation for selected gun
+        info = gun_pivot.transform.GetChild(_index).GetComponent<Weapon_info>();
     }
 }
