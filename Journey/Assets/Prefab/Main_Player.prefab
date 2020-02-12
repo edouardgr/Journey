@@ -99,6 +99,8 @@ MonoBehaviour:
   unlocked: 1
   weapon_damage: 10
   spread_radius: 0.04
+  bullet_amount: 1
+  bullet_delay: 0
 --- !u!1 &5474731148536486159
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +413,8 @@ MonoBehaviour:
   unlocked: 0
   weapon_damage: 5
   spread_radius: 0.05
+  bullet_amount: 5
+  bullet_delay: 0
 --- !u!1001 &1189091777998887390
 PrefabInstance:
   m_ObjectHideFlags: 0

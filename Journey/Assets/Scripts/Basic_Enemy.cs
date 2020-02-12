@@ -57,14 +57,14 @@ public class Basic_Enemy : MonoBehaviour, Shootable
         }
     }
 
-    public void Damage(int amount)
+    public void Damage(int amount, GameObject sender)
     {
         info.health -= amount;
         if(info.health <= 0) {
             Destroy(gameObject);
         }
         if(!target) {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            target = sender.transform;
         }
     }
 }
