@@ -12,7 +12,6 @@ public class Target_Practice : MonoBehaviour, Shootable
 
     public void Damage(int amount, GameObject sender)
     {
-        Debug.Log(active_index);
         time = 0;
         hit[active_index] = true;
         transform.GetChild(active_index).GetComponent<MeshCollider>().enabled = false;

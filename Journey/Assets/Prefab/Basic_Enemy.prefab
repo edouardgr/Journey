@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86172aa9ceea95c4a823230ece937c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 5980971882836636301, guid: d6a8e247bba2f4545b87e1f71770e22e, type: 3}
+  enemy: {fileID: 0}
   detection_radius: 10
   target: {fileID: 0}
+  projectile: {fileID: 226207094930388968, guid: 02cd34a99aeef034abdb0aa52ca1b0b8,
+    type: 3}

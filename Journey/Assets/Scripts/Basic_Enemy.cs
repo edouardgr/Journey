@@ -9,7 +9,7 @@ public class Basic_Enemy : MonoBehaviour, Shootable
     Enemy_info info;
     public float detection_radius = 10f;
     public Transform target = null;
-
+    public GameObject projectile;
     float timer = 0;
 
     // Start is called before the first frame update
@@ -31,7 +31,12 @@ public class Basic_Enemy : MonoBehaviour, Shootable
         timer -= Time.deltaTime;
         if(timer <= 0) {
             timer = info.projectile_fire_rate;
-
+            //SHOOT PROJECTILE
+            GameObject obj = Instantiate(projectile, transform.GetChild(0).GetChild(0).position, Quaternion.identity, null); //MODIFY
+            obj.transform.LookAt(target);
+            obj.GetComponent<Projectile_Behaviour>().speed = info.projectile_speed;
+            obj.GetComponent<Projectile_Behaviour>().damage = info.projectile_damage;
+            obj.GetComponent<Projectile_Behaviour>().parent = transform.GetChild(0).GetChild(0).gameObject; //REWORK
         }
     }
 
@@ -57,13 +62,14 @@ public class Basic_Enemy : MonoBehaviour, Shootable
         }
     }
 
-    public void Damage(int amount, GameObject sender)
+    public void Damage(int amount, GameObject sender) //Recieve damage
     {
         info.health -= amount;
         if(info.health <= 0) {
             Destroy(gameObject);
         }
         if(!target) {
+            timer = info.projectile_fire_rate;
             target = sender.transform;
         }
     }
