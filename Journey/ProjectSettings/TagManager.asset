@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Glock
   - Palm Tree
+  - Enemy
   layers:
   - Default
   - TransparentFX
