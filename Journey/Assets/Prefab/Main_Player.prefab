@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 1
   weapon_damage: 10
+  spread_radius: 0.04
 --- !u!1 &5474731148536486159
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +346,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
+  bullet_hole: {fileID: 6651540336131142546, guid: 8e5671b65fe4c0947a1f854806a58311,
+    type: 3}
+  max_bullet_holes: 5
 --- !u!33 &249937557912439472
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -405,7 +409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unlocked: 0
-  weapon_damage: 10
+  weapon_damage: 5
+  spread_radius: 0.05
 --- !u!1001 &1189091777998887390
 PrefabInstance:
   m_ObjectHideFlags: 0
