@@ -18,8 +18,7 @@ public class Gun_pickup : MonoBehaviour
         origin = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate() //Very dangerous
     {
         transform.GetChild(0).Rotate(new Vector3(0, rotation_speed, 0)); //Possibly add to fixedUpdate //Rotate the weapon to get players attention
         transform.GetChild(0).position = origin + new Vector3(0, Mathf.Sin(Time.time * frequency) * amplitude, 0);
