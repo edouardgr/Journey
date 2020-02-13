@@ -10,9 +10,8 @@ public class Target_Practice : MonoBehaviour, Shootable
     bool[] hit;
     float scale_factor = 2f;
 
-    public void Damage(int amount)
+    public void Damage(int amount, GameObject sender)
     {
-        Debug.Log(active_index);
         time = 0;
         hit[active_index] = true;
         transform.GetChild(active_index).GetComponent<MeshCollider>().enabled = false;
