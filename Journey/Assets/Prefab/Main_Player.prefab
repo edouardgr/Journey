@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 1
   weapon_damage: 10
+  bullet_force: 10
   spread_radius: 0.04
   bullet_amount: 1
   bullet_delay: 0
@@ -232,6 +233,7 @@ GameObject:
   - component: {fileID: 1582049615041966858}
   - component: {fileID: 6511725926520545399}
   - component: {fileID: 130294806050093417}
+  - component: {fileID: 408036683}
   - component: {fileID: 249937557912439472}
   - component: {fileID: 6139041443895378462}
   m_Layer: 0
@@ -350,7 +352,20 @@ MonoBehaviour:
   manager: {fileID: 0}
   bullet_hole: {fileID: 6651540336131142546, guid: 8e5671b65fe4c0947a1f854806a58311,
     type: 3}
-  max_bullet_holes: 5
+  max_bullet_holes: 100
+--- !u!114 &408036683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474731150052543086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f0587c74e16b948a49c21d63078722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!33 &249937557912439472
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -412,6 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 0
   weapon_damage: 5
+  bullet_force: 10
   spread_radius: 0.05
   bullet_amount: 5
   bullet_delay: 0

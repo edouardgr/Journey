@@ -51,6 +51,10 @@ public class Weapon_shooter : MonoBehaviour
                     if (spread_hit.collider.GetComponentInParent<Shootable>() != null) { //Detect if hit object has a shootable property
                         spread_hit.collider.GetComponentInParent<Shootable>().Damage(manager.info.weapon_damage, gameObject); //Active shootable property
                     }
+
+                    if (spread_hit.collider.GetComponent<RigidBody>() != null) {
+                        spread_hit.collider.GetComponent<RigidBody>();
+                    }
                 }
             }
         }
