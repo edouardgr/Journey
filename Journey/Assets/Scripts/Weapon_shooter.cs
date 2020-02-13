@@ -52,8 +52,9 @@ public class Weapon_shooter : MonoBehaviour
                         spread_hit.collider.GetComponentInParent<Shootable>().Damage(manager.info.weapon_damage, gameObject); //Active shootable property
                     }
 
-                    if (spread_hit.collider.GetComponent<RigidBody>() != null) {
-                        spread_hit.collider.GetComponent<RigidBody>();
+                    if (spread_hit.collider.GetComponent<Rigidbody>() != null) { //Check if object has a rigidbody
+                        spread_hit.collider.GetComponent<Rigidbody>().AddForceAtPosition(ray_origin.forward * manager.info.bullet_force, spread_hit.point, ForceMode.Impulse); //Add an impulse to the point of contact on the object
+                        Debug.DrawLine(spread_hit.point, spread_hit.point + (ray_origin.forward * manager.info.bullet_force), Color.red, 10f);
                     }
                 }
             }
