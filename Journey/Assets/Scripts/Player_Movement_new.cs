@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Basic_Movement_Jump : MonoBehaviour
+public class Player_Movement_new : MonoBehaviour
 {
      public float speed = 12.0f;
      public float rotateSpeed = 12.0f;
