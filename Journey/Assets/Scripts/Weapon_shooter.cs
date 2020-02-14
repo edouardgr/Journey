@@ -54,7 +54,7 @@ public class Weapon_shooter : MonoBehaviour
 
                     if (spread_hit.collider.GetComponent<Rigidbody>() != null) { //Check if object has a rigidbody
                         spread_hit.collider.GetComponent<Rigidbody>().AddForceAtPosition(ray_origin.forward * manager.info.bullet_force, spread_hit.point, ForceMode.Impulse); //Add an impulse to the point of contact on the object
-                        Debug.DrawLine(spread_hit.point, spread_hit.point + (ray_origin.forward * manager.info.bullet_force), Color.red, 10f);
+                        Debug.DrawLine(spread_hit.point, spread_hit.point - (ray_origin.forward * manager.info.bullet_force), Color.red, 10f);
                     }
                 }
             }
@@ -82,7 +82,6 @@ public class Weapon_shooter : MonoBehaviour
     void create_bullet_holes(RaycastHit ray)
     {
         if (ray.collider.tag != "Enemy") { //Bullet hole concept (needs brainstorming)
-                                                  //Create bullet hole
             GameObject obj = Instantiate(bullet_hole, ray.point, Quaternion.LookRotation(ray.normal), null);
             obj.transform.position += obj.transform.forward * 0.001f;
             obj.transform.parent = ray.collider.transform;
