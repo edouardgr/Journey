@@ -77,6 +77,6 @@ public class Weapon_Manager : MonoBehaviour
         }
         gun_pivot.transform.GetChild(curr_index).gameObject.SetActive(true); //Set the current index child to show
         gun_pivot.GetComponent<Animator>().Play("Weapon_load", 0); //Play equiping animation for selected gun
-        info = gun_pivot.transform.GetChild(_index).GetComponent<Weapon_info>();
+        info = gun_pivot.transform.GetChild(_index).GetComponent<Weapon_info>(); //Save the info attached to the selected weapon
     }
 }

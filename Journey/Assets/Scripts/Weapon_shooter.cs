@@ -44,11 +44,17 @@ public class Weapon_shooter : MonoBehaviour
             }
 
             for (int i = 0; i < manager.info.bullet_amount; i++) {
-                Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(Random.Range(-manager.info.spread_radius, manager.info.spread_radius), Random.Range(-manager.info.spread_radius, manager.info.spread_radius), 0), out spread_hit);
+                Vector2 randxy = Random.insideUnitCircle * manager.info.spread_radius;
+                Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(randxy.x, randxy.y, 0), out spread_hit);
                 if (spread_hit.collider != null) {
                     create_bullet_holes(spread_hit);
                     if (spread_hit.collider.GetComponentInParent<Shootable>() != null) { //Detect if hit object has a shootable property
-                        spread_hit.collider.GetComponentInParent<Shootable>().Damage(manager.info.weapon_damage); //Active shootable property
+                        spread_hit.collider.GetComponentInParent<Shootable>().Damage(manager.info.weapon_damage, gameObject); //Active shootable property
+                    }
+
+                    if (spread_hit.collider.GetComponent<Rigidbody>() != null) { //Check if object has a rigidbody
+                        spread_hit.collider.GetComponent<Rigidbody>().AddForceAtPosition(ray_origin.forward * manager.info.bullet_force, spread_hit.point, ForceMode.Impulse); //Add an impulse to the point of contact on the object
+                        Debug.DrawLine(spread_hit.point, spread_hit.point - (ray_origin.forward * manager.info.bullet_force), Color.red, 10f);
                     }
                 }
             }
@@ -76,7 +82,6 @@ public class Weapon_shooter : MonoBehaviour
     void create_bullet_holes(RaycastHit ray)
     {
         if (ray.collider.tag != "Enemy") { //Bullet hole concept (needs brainstorming)
-                                                  //Create bullet hole
             GameObject obj = Instantiate(bullet_hole, ray.point, Quaternion.LookRotation(ray.normal), null);
             obj.transform.position += obj.transform.forward * 0.001f;
             obj.transform.parent = ray.collider.transform;
