@@ -5,7 +5,8 @@ using UnityEditor;
 
 public class Weapon_shooter : MonoBehaviour
 {
-    public Weapon_Manager manager;
+    Weapon_Manager manager;
+    player_movement movement;
     RaycastHit spread_hit, normal_hit;
     Transform ray_origin;
 
@@ -18,6 +19,7 @@ public class Weapon_shooter : MonoBehaviour
     void Awake()
     {
         manager = GetComponent<Weapon_Manager>();
+        movement = GetComponent<player_movement>();
         ray_origin = transform.GetChild(0).transform;
     }
 
@@ -44,7 +46,8 @@ public class Weapon_shooter : MonoBehaviour
             }
 
             for (int i = 0; i < manager.info.bullet_amount; i++) {
-                Vector2 randxy = Random.insideUnitCircle * manager.info.spread_radius;
+                Vector2 randxy = Random.insideUnitCircle * (manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z))));
+                Debug.Log(randxy);
                 Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(randxy.x, randxy.y, 0), out spread_hit);
                 if (spread_hit.collider != null) {
                     create_bullet_holes(spread_hit);
@@ -71,7 +74,7 @@ public class Weapon_shooter : MonoBehaviour
             if(normal_hit.collider != null) {
                 Handles.color = Color.green;
                 RaycastHit temp;
-                Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(0, manager.info.spread_radius, 0), out temp);
+                Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(0, manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z))), 0), out temp);
                 Handles.DrawWireDisc(normal_hit.point, normal_hit.normal, temp.point.y - normal_hit.point.y);
             }
         }
