@@ -13,7 +13,11 @@ public class Weapon_shooter : MonoBehaviour
     //Bullet hole
     public GameObject bullet_hole;
     List<GameObject> bullet_hole_list = new List<GameObject>();
-    public int max_bullet_holes = 5;
+    public int max_bullet_holes = 100;
+
+    //Move objects
+    public float move_reach = 4f;
+    GameObject move_obj;
 
     // Start is called before the first frame update
     void Awake()
@@ -26,11 +30,28 @@ public class Weapon_shooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast(ray_origin.position, ray_origin.forward, out normal_hit)) {
-
+        if (move_obj) {
+            if (Input.GetKeyDown(KeyCode.E)) {
+                move_obj = null;
+                move_obj.layer = LayerMask.NameToLayer("Default");
+            } else {
+                RaycastHit pos;
+                if(Physics.Raycast(ray_origin.position, ray_origin.forward, out pos, move_reach)) {
+                    move_obj.transform.position = pos.point;
+                } else {
+                    move_obj.transform.position = ray_origin.position + (ray_origin.forward * move_reach);
+                }
+            }
         }
 
-        
+        if (Physics.Raycast(ray_origin.position, ray_origin.forward, out normal_hit)) {
+            if(normal_hit.collider.tag == "Movable" && normal_hit.distance < move_reach && Input.GetKeyDown(KeyCode.E)) {
+                if(move_obj == null) {
+                    move_obj = normal_hit.collider.gameObject;
+                    move_obj.layer = LayerMask.NameToLayer("Ignore Raycast");
+                }
+            }
+        }
 
         //ADDD: MAKE RADIUS SMALLER IS STANDING STILL
 
@@ -47,7 +68,6 @@ public class Weapon_shooter : MonoBehaviour
 
             for (int i = 0; i < manager.info.bullet_amount; i++) {
                 Vector2 randxy = Random.insideUnitCircle * (manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z))));
-                Debug.Log(randxy);
                 Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(randxy.x, randxy.y, 0), out spread_hit);
                 if (spread_hit.collider != null) {
                     create_bullet_holes(spread_hit);
