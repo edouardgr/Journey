@@ -16,9 +16,11 @@ public class Weapon_Sway : MonoBehaviour
      //Initial position of weapon
      private Vector3 Initial_Position;
 
+     Animator anim;
 
      private void Start()
      {
+          anim = GetComponent<Animator>();
           //Getting first position of weapon
           Initial_Position = transform.localPosition;
      }
@@ -26,6 +28,12 @@ public class Weapon_Sway : MonoBehaviour
      // Update is called once per frame
      void Update()
     {
+          if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+          {
+               anim.enabled = false;
+          }
+          else anim.enabled = true;
+
           float Movement_X = -Input.GetAxis("Mouse X") * Amount;
           float Movement_Y = -Input.GetAxis("Mouse Y") * Amount;
           Movement_X = Mathf.Clamp(Movement_X, -Max_Amount, Max_Amount);

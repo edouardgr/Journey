@@ -10,6 +10,7 @@ public class GunSway : MonoBehaviour
     float amount = 0.01f;
     float rot_amount = 5f;
 
+
     void Awake()
     {
         pm = transform.GetComponentInParent<player_movement>();
