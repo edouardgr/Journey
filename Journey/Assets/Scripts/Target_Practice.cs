@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Edouard*/
 public class Target_Practice : MonoBehaviour, Shootable
 {
     float time_swap = 2f;

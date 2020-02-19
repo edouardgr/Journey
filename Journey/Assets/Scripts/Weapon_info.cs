@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon_info : MonoBehaviour
+/*Edouard*/
+public class Weapon_Info : MonoBehaviour
 {
     public bool unlocked = false; //Determine if the player can use it
     public int weapon_damage; //How much damage a bullet does

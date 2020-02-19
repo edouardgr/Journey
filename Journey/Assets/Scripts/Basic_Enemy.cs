@@ -7,7 +7,7 @@ using UnityEditor;
 public class Basic_Enemy : MonoBehaviour, Shootable
 {
     public GameObject enemy; //Enemy to spawn
-    Enemy_info info; //Info related to the spawned enemy
+    Enemy_Info info; //Info related to the spawned enemy
     public float detection_radius = 10f; //Player enters radius, enemy becomes active
     public Transform target = null; //Object that the enemy will chase
     public GameObject projectile; //Projectile object enemy will shoot at target
@@ -17,7 +17,7 @@ public class Basic_Enemy : MonoBehaviour, Shootable
     void Awake()
     {
         GameObject obj = Instantiate(enemy, transform); //Create the enemy
-        info = obj.GetComponent<Enemy_info>(); //Get info of the enemy
+        info = obj.GetComponent<Enemy_Info>(); //Get info of the enemy
     }
 
     private void FixedUpdate()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*Edouard*/
-public class Enemy_info : MonoBehaviour
+public class Enemy_Info : MonoBehaviour
 {
     public int health; //Enemy health
     public float move_speed; //Movement speed

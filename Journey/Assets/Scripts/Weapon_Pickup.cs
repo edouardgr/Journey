@@ -38,7 +38,7 @@ public class Weapon_Pickup : MonoBehaviour
         if(other.tag == "Player") {
             string[] split_name = weapon.name.Split('_');
             int weapon_index = int.Parse(split_name[split_name.Length - 1]); //Get the index of the weapon
-            Weapon_info info = other.GetComponent<Weapon_Manager>().gun_pivot.transform.GetChild(weapon_index).GetComponent<Weapon_info>(); //Get data for pick up weapon slot
+            Weapon_Info info = other.GetComponent<Weapon_Manager>().gun_pivot.transform.GetChild(weapon_index).GetComponent<Weapon_Info>(); //Get data for pick up weapon slot
             if (!info.unlocked) { //Check if weapon has been unlocked yet, prevents weapon switching when already obtained
                 info.unlocked = true; //Enable the currently picked up weapon
                 other.GetComponent<Weapon_Manager>().switch_weapon(weapon_index); //Switch to the pick up weapon
