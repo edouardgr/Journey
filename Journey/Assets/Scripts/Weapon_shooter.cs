@@ -39,7 +39,7 @@ public class Weapon_Shooter : MonoBehaviour
         //Weapon interaction
         if (!is_holding && manager.unlocked_count() > 0 && manager.gun_pivot.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //If no weapons are equiped, don't run
             Animator ani = manager.gun_pivot.transform.GetChild(manager.curr_index).GetComponent<Animator>(); //Get animator of current weapon
-            if (Input.GetMouseButtonDown(0) /*&& ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")*/) { //Left mouse button is pressed & animation is complete
+            if (Input.GetMouseButton(0) && ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //Left mouse button is pressed & animation is complete
                 if (ani != null) {
                     ani.Play("Fire", 0); //Play firing animation for the equiped weapon
                 }
