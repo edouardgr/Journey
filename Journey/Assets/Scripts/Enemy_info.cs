@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Edouard*/
 public class Enemy_info : MonoBehaviour
 {
-    public int health;
-    public float move_speed;
-    public float projectile_speed;
-    public float projectile_fire_rate;
-    public int projectile_damage;
+    public int health; //Enemy health
+    public float move_speed; //Movement speed
+    public float projectile_speed; //Speed of instanced projectiles
+    public float projectile_fire_rate; //Delay between each instanced projectile
+    public int projectile_damage; //Amount of damage each projectile will cause
 }

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class Gun_pickup : MonoBehaviour
+/*Edouard*/
+public class Weapon_Pickup : MonoBehaviour
 {
-    public Object weapon;
+    public Object weapon; //Weapon that will be displayed
     public float rotation_speed = 2f; //Speed at which the weapon will rotate
-    Vector3 origin;
+    Vector3 origin; //Origin of weapon
     public float frequency = 4f; //DISCUSS
     public float amplitude = 0.25f;
 
     // Start is called before the first frame update
     void Awake()
     {
-        Instantiate(weapon, transform); //Create the gun object
-        origin = transform.position;
+        Instantiate(weapon, transform); //Create the weapon object
+        origin = transform.position; //Set the origin of weapon
     }
 
     private void FixedUpdate() //Very dangerous
