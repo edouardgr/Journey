@@ -9,6 +9,7 @@ public class Weapon_Manager : MonoBehaviour
     int max_index; //Highest value the index can go to
     public Weapon_Info info = null;
     //float switch_delay = 0.5f; //Delay between switching guns, prevents quick spamming //FUTURE IDEA
+    bool weapons_enabled = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class Weapon_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!gun_pivot.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //Prevents quick swapping between weapons, remove for fun
+        if(!weapons_enabled || !gun_pivot.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //Prevents quick swapping between weapons, remove for fun
             return;
         }
         
@@ -44,7 +45,7 @@ public class Weapon_Manager : MonoBehaviour
     public int unlocked_count() { //Return number of guns that are unlocked
         int count = 0;
         for(int i = 0; i < gun_pivot.transform.childCount; i++) { //Cycle through weapons
-            if(gun_pivot.transform.GetChild(0).GetComponent<Weapon_Info>().unlocked) { //Check if unlocked
+            if(gun_pivot.transform.GetChild(i).GetComponent<Weapon_Info>().unlocked) { //Check if unlocked
                 count++;
             }
         }
@@ -76,7 +77,21 @@ public class Weapon_Manager : MonoBehaviour
             gun_pivot.transform.GetChild(i).gameObject.SetActive(false);
         }
         gun_pivot.transform.GetChild(curr_index).gameObject.SetActive(true); //Set the current index child to show
-        gun_pivot.GetComponent<Animator>().Play("Weapon_load", 0); //Play equiping animation for selected gun
+        gun_pivot.GetComponent<Animator>().Play("Weapon_load"); //Play equiping animation for selected gun
         info = gun_pivot.transform.GetChild(_index).GetComponent<Weapon_Info>(); //Save the info attached to the selected weapon
+    }
+
+    public void disable_weapons()
+    {
+        for (int i = 0; i < max_index; i++) { //Cycle through guns and disable them all
+            gun_pivot.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        weapons_enabled = false;
+    }
+
+    public void enable_weapons()
+    {
+        switch_weapon(curr_index);
+        weapons_enabled = true;
     }
 }

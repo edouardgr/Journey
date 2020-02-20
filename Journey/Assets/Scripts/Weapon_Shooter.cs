@@ -41,7 +41,7 @@ public class Weapon_Shooter : MonoBehaviour
         //Weapon interaction
         if (!is_holding && manager.unlocked_count() > 0 && manager_ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //If no weapons are equiped, don't run
             Animator ani = manager.gun_pivot.transform.GetChild(manager.curr_index).GetComponent<Animator>(); //Get animator of current weapon
-            if (Input.GetMouseButtonDown(0) && ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //Left mouse button is pressed & animation is complete
+            if (Input.GetMouseButton(0) && ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //Left mouse button is pressed & animation is complete
                 if (ani != null) {
                     ani.Play("Fire", 0); //Play firing animation for the equiped weapon
                 }
@@ -71,7 +71,7 @@ public class Weapon_Shooter : MonoBehaviour
             } else if (Input.GetKeyDown(KeyCode.E)) { //Drop button pressed
                 set_holding_obj("Default", false, null, 0f);
             } else {
-                RaycastHit pos;
+                //RaycastHit pos;
                 /*if (Physics.Raycast(ray_origin.position, ray_origin.forward, out pos, move_reach)) { //Shoot ray to find distance to ground to prevent clipping
                     move_obj.transform.position = pos.point; //Set point to where the ray hit
                 } else {*/
@@ -82,7 +82,7 @@ public class Weapon_Shooter : MonoBehaviour
             if (normal_hit.collider != null) { //Shoot ray to check if object is in range
                 if (normal_hit.collider.tag == "Movable" && normal_hit.distance < move_reach && Input.GetKeyDown(KeyCode.E)) { //Check if object can be picked up and pick up object
                     set_holding_obj("Ignore Raycast", true, normal_hit.collider.gameObject, 0f);
-                    manager_ani.Play("Weapon_unload");
+                    manager.disable_weapons();
                 }
             }
         }
@@ -127,7 +127,10 @@ public class Weapon_Shooter : MonoBehaviour
         move_obj.GetComponent<Rigidbody>().useGravity = !enable; //Disable or enable gravity
         move_obj.GetComponent<Rigidbody>().velocity = Vector3.zero; //Reset velocity, stops the object from slamming into the ground
         move_obj.GetComponent<Rigidbody>().AddForce(ray_origin.forward * launch_speed, ForceMode.Impulse); //Add force to launch object
-        if (!enable) { move_obj = null; /*Remove reference to held object*/ }
+        if (!enable) {
+            move_obj = null; /*Remove reference to held object*/
+            manager.enable_weapons();
+        }
         is_holding = enable;
     }
 }
