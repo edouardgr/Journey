@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player_movement : MonoBehaviour
+/*Edouard & Brain*/
+public class Player_Movement : MonoBehaviour
 {
     CharacterController cc;
     //Maximum movement speed
@@ -14,8 +15,8 @@ public class player_movement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        cc = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
+        cc = GetComponent<CharacterController>(); //Get character controller
+        Cursor.lockState = CursorLockMode.Locked; //Removes mouse from the screen   
     }
 
     void FixedUpdate()

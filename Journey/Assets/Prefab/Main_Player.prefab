@@ -100,6 +100,7 @@ MonoBehaviour:
   weapon_damage: 10
   bullet_force: 10
   spread_radius: 0.04
+  spread_move_radius: 0
   bullet_amount: 1
   bullet_delay: 0
 --- !u!1 &5474731148536486159
@@ -234,7 +235,6 @@ GameObject:
   - component: {fileID: 6511725926520545399}
   - component: {fileID: 130294806050093417}
   - component: {fileID: 408036683}
-  - component: {fileID: 193950479259956635}
   - component: {fileID: 249937557912439472}
   - component: {fileID: 6139041443895378462}
   m_Layer: 0
@@ -350,10 +350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c1ad9bb99e65b4c8090477bb2717c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   bullet_hole: {fileID: 6651540336131142546, guid: 8e5671b65fe4c0947a1f854806a58311,
     type: 3}
   max_bullet_holes: 100
+  move_reach: 4
 --- !u!114 &408036683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,18 +367,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
---- !u!114 &193950479259956635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5474731150052543086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f2a99cb226b60b4485ef56896df349e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!33 &249937557912439472
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -442,6 +430,7 @@ MonoBehaviour:
   weapon_damage: 5
   bullet_force: 10
   spread_radius: 0.05
+  spread_move_radius: 0
   bullet_amount: 5
   bullet_delay: 0
 --- !u!1001 &1189091777998887390

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class Gun_pickup : MonoBehaviour
+/*Edouard*/
+public class Weapon_Pickup : MonoBehaviour
 {
-    public Object weapon;
+    public Object weapon; //Weapon that will be displayed
     public float rotation_speed = 2f; //Speed at which the weapon will rotate
-    Vector3 origin;
+    Vector3 origin; //Origin of weapon
     public float frequency = 4f; //DISCUSS
     public float amplitude = 0.25f;
 
     // Start is called before the first frame update
     void Awake()
     {
-        Instantiate(weapon, transform); //Create the gun object
-        origin = transform.position;
+        Instantiate(weapon, transform); //Create the weapon object
+        origin = transform.position; //Set the origin of weapon
     }
 
     private void FixedUpdate() //Very dangerous
@@ -37,7 +38,7 @@ public class Gun_pickup : MonoBehaviour
         if(other.tag == "Player") {
             string[] split_name = weapon.name.Split('_');
             int weapon_index = int.Parse(split_name[split_name.Length - 1]); //Get the index of the weapon
-            Weapon_info info = other.GetComponent<Weapon_Manager>().gun_pivot.transform.GetChild(weapon_index).GetComponent<Weapon_info>(); //Get data for pick up weapon slot
+            Weapon_Info info = other.GetComponent<Weapon_Manager>().gun_pivot.transform.GetChild(weapon_index).GetComponent<Weapon_Info>(); //Get data for pick up weapon slot
             if (!info.unlocked) { //Check if weapon has been unlocked yet, prevents weapon switching when already obtained
                 info.unlocked = true; //Enable the currently picked up weapon
                 other.GetComponent<Weapon_Manager>().switch_weapon(weapon_index); //Switch to the pick up weapon

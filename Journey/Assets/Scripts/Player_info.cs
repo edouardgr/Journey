@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_info : MonoBehaviour, Shootable
+/*Edouard*/
+public class Player_Info : MonoBehaviour, Shootable
 {
-    public int health = 100;
+    public int health = 100; //Players health
 
     public void Damage(int amount, GameObject sender)
     {
-        health -= amount;
+        health -= amount; //Subtract recieved health
     }
 }
