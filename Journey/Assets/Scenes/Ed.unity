@@ -468,7 +468,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &54143100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1699,7 +1699,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &250557013
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2198,7 +2198,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &279693501
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6038,7 +6038,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &1014956280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7294,7 +7294,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &1248255094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8076,7 +8076,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &1377920608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10191,7 +10191,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &1699590548
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10951,7 +10951,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &1790612929
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12563,7 +12563,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!65 &2085274392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13141,6 +13141,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1836066911, guid: 182e8946213fd4964ac1bf523ed5e653, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836066911, guid: 182e8946213fd4964ac1bf523ed5e653, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836066911, guid: 182e8946213fd4964ac1bf523ed5e653, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836066911, guid: 182e8946213fd4964ac1bf523ed5e653, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836066911, guid: 182e8946213fd4964ac1bf523ed5e653, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836066911, guid: 182e8946213fd4964ac1bf523ed5e653, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836066911, guid: 182e8946213fd4964ac1bf523ed5e653, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 130294806050093417, guid: 182e8946213fd4964ac1bf523ed5e653,
         type: 3}
       propertyPath: move_reach
