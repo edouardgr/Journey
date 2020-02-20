@@ -71,7 +71,7 @@ public class Weapon_Shooter : MonoBehaviour
             } else if (Input.GetKeyDown(KeyCode.E)) { //Drop button pressed
                 set_holding_obj("Default", false, null, 0f);
             } else {
-                RaycastHit pos;
+                //RaycastHit pos;
                 /*if (Physics.Raycast(ray_origin.position, ray_origin.forward, out pos, move_reach)) { //Shoot ray to find distance to ground to prevent clipping
                     move_obj.transform.position = pos.point; //Set point to where the ray hit
                 } else {*/
