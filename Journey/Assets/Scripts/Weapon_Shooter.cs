@@ -12,6 +12,7 @@ public class Weapon_Shooter : MonoBehaviour
     RaycastHit spread_hit, normal_hit; 
     Transform ray_origin;
     public Canvas hit_marker;
+    public RectTransform aim_reticle;
 
     //Bullet hole
     public GameObject bullet_hole; //Prefab for bullet holes to be placed on objects
@@ -38,6 +39,10 @@ public class Weapon_Shooter : MonoBehaviour
     {
         Physics.Raycast(ray_origin.position, ray_origin.forward, out normal_hit); //Shoot ray to check if object is in range
 
+        //Recticle enlargens when moving, to indicate worse accuracy when moving
+        float reticle_size = 40 + (Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)) * 20);
+        aim_reticle.sizeDelta = new Vector2(reticle_size, reticle_size);
+
         //Weapon interaction
         if (!is_holding && manager.unlocked_count() > 0 && manager_ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //If no weapons are equiped, don't run
             Animator ani = manager.gun_pivot.transform.GetChild(manager.curr_index).GetComponent<Animator>(); //Get animator of current weapon
@@ -59,6 +64,7 @@ public class Weapon_Shooter : MonoBehaviour
 
                         if (spread_hit.collider.GetComponent<Rigidbody>() != null) { //Check if object has a rigidbody
                             spread_hit.collider.GetComponent<Rigidbody>().AddForceAtPosition(ray_origin.forward * manager.info.bullet_force, spread_hit.point, ForceMode.Impulse); //Add an impulse to the point of contact on the object
+                            spread_hit.collider.gameObject.AddComponent<Throwable_Obj>().hit_marker = hit_marker; //Flying objects will do damage
                             Debug.DrawLine(spread_hit.point, spread_hit.point - (ray_origin.forward * manager.info.bullet_force), Color.red, 10f); //Visual indicator of bullet impact and force applied
                         }
                     }
@@ -73,13 +79,9 @@ public class Weapon_Shooter : MonoBehaviour
                 set_holding_obj("Default", false, null, throw_force);
             } else if (Input.GetKeyDown(KeyCode.E)) { //Drop button pressed
                 set_holding_obj("Default", false, null, 0f);
-            } else {
-                //RaycastHit pos;
-                /*if (Physics.Raycast(ray_origin.position, ray_origin.forward, out pos, move_reach)) { //Shoot ray to find distance to ground to prevent clipping
-                    move_obj.transform.position = pos.point; //Set point to where the ray hit
-                } else {*/
-                    move_obj.transform.position = Vector3.Lerp(move_obj.transform.position, ray_origin.position + (ray_origin.forward * move_reach), Time.deltaTime * 100f); //Set distance to max reach
-                //}
+            } else { //Currently holding object
+                RaycastHit pos;
+                move_obj.transform.position = Vector3.Lerp(move_obj.transform.position, (Physics.Raycast(ray_origin.position, ray_origin.forward, out pos, move_reach) ? pos.point : ray_origin.position + (ray_origin.forward * move_reach)), Time.deltaTime * 100f); //Set distance to max reach
             }
         } else {
             if (normal_hit.collider != null) { //Shoot ray to check if object is in range
