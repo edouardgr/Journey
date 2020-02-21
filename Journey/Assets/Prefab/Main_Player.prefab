@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1836066911}
-  - component: {fileID: 1836066912}
   - component: {fileID: 1448620630}
   m_Layer: 0
   m_Name: Gun_Pivot
@@ -34,18 +33,6 @@ Transform:
   m_Father: {fileID: 5474731148536486147}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1836066912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836066910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e28b4a4ce97de34e82cbcef164ae2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1448620630
 Animator:
   serializedVersion: 3
@@ -305,7 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HorizontalSpeed: 4
   VerticalSpeed: 4
-  pitch_limit: 80
+  pitch_limit: 90
 --- !u!114 &1582049615041966858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +310,7 @@ MonoBehaviour:
   acc_input_z: 0.2
   curr_input_x: 0
   curr_input_z: 0
+  in_water: 0
 --- !u!114 &6511725926520545399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3c1ad9bb99e65b4c8090477bb2717c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holding_pivot: {fileID: 0}
+  hit_marker: {fileID: 0}
   bullet_hole: {fileID: 6651540336131142546, guid: 8e5671b65fe4c0947a1f854806a58311,
     type: 3}
   max_bullet_holes: 100
@@ -416,25 +404,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4368223703337322859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7179139928364237015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad09fcb20eeab5547aea6654f3d81cfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unlocked: 1
-  weapon_damage: 5
-  bullet_force: 10
-  spread_radius: 0.05
-  spread_move_radius: 0.03
-  bullet_amount: 5
-  bullet_delay: 0
 --- !u!95 &606669982
 Animator:
   serializedVersion: 3
@@ -454,6 +423,25 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4368223703337322859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7179139928364237015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad09fcb20eeab5547aea6654f3d81cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlocked: 1
+  weapon_damage: 5
+  bullet_force: 10
+  spread_radius: 0.05
+  spread_move_radius: 0.03
+  bullet_amount: 5
+  bullet_delay: 0
 --- !u!1001 &1189091777998887390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -610,7 +598,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2195c1e8d2713d149b6375f6ca0830a8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2195c1e8d2713d149b6375f6ca0830a8, type: 3}

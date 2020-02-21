@@ -11,7 +11,7 @@ public class Weapon_Shooter : MonoBehaviour
     Player_Movement movement; //Player movement
     RaycastHit spread_hit, normal_hit; 
     Transform ray_origin;
-    public GameObject holding_pivot;
+    public Canvas hit_marker;
 
     //Bullet hole
     public GameObject bullet_hole; //Prefab for bullet holes to be placed on objects
@@ -46,6 +46,7 @@ public class Weapon_Shooter : MonoBehaviour
                     ani.Play("Fire", 0); //Play firing animation for the equiped weapon
                 }
 
+                bool hit_confirmed = false;
                 for (int i = 0; i < manager.info.bullet_amount; i++) { //Loop for each bullet that will be fired
                     Vector2 randxy = Random.insideUnitCircle * (manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)))); //Random point inside the spread radius
                     Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(randxy.x, randxy.y, 0), out spread_hit); //Shoot random point from the player, spread gets larger the further from the object, also the spread increases when moving
@@ -53,6 +54,7 @@ public class Weapon_Shooter : MonoBehaviour
                         create_bullet_holes(spread_hit); //Create bullet hole at the position of ray intersect
                         if (spread_hit.collider.GetComponentInParent<Shootable>() != null) { //Detect if hit object has a shootable property
                             spread_hit.collider.GetComponentInParent<Shootable>().Damage(manager.info.weapon_damage, gameObject); //Active shootable property
+                            hit_confirmed = true;
                         }
 
                         if (spread_hit.collider.GetComponent<Rigidbody>() != null) { //Check if object has a rigidbody
@@ -61,6 +63,7 @@ public class Weapon_Shooter : MonoBehaviour
                         }
                     }
                 }
+                if(hit_confirmed) { hit_marker.GetComponent<Animator>().Play("Hit"); }
             }
         }
 
@@ -128,6 +131,7 @@ public class Weapon_Shooter : MonoBehaviour
         move_obj.GetComponent<Rigidbody>().velocity = Vector3.zero; //Reset velocity, stops the object from slamming into the ground
         move_obj.GetComponent<Rigidbody>().AddForce(ray_origin.forward * launch_speed, ForceMode.Impulse); //Add force to launch object
         if (!enable) {
+            move_obj.AddComponent<Throwable_Obj>().hit_marker = hit_marker;
             move_obj = null; /*Remove reference to held object*/
             manager.enable_weapons();
         }

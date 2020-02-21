@@ -69,7 +69,7 @@ public class Basic_Enemy : MonoBehaviour, Shootable
         if(info.health <= 0) { //Check if enemy health is below 0
             Destroy(gameObject); //Remove enemy from the game
         }
-        if(!target) { //Check if enemy is not currently chasing a target
+        if(!target && sender) { //Check if enemy is not currently chasing a target
             timer = info.projectile_fire_rate; //Initilize timer
             target = sender.transform; //Set the target to chase
         }
