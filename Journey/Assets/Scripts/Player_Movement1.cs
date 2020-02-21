@@ -5,17 +5,17 @@ using UnityEngine;
 public class Player_Movement1: MonoBehaviour
 {
  
-     public float speed = 12.0f;
-     public float jump_speed = 5.0f;
-     public float gravity = 10.0f;
+      float speed = 12.0f;
+      float jump_speed = 9.0f;
+      float gravity = 20.0f;
      
-     public float swim_speed = 6.0f;
-     public float swim_gravity = 5.0f;
-     private bool is_in_water = false;
+      float swim_speed = 12f;
+      float swim_gravity = 3f;
+      bool is_in_water = false;
 
-     private Vector3 move_direction = Vector3.zero;
-     private Vector3 move_direction_y = Vector3.zero;
-     private CharacterController CC;
+      Vector3 move_direction = Vector3.zero;
+      Vector3 move_direction_water = Vector3.zero;
+      CharacterController CC;
 
 
      void Start()
@@ -28,15 +28,14 @@ public class Player_Movement1: MonoBehaviour
      void Update()
      {
           if (is_in_water) {
-               if (Input.GetKeyDown("w"))
-               {
-                    move_direction = transform.GetChild(0).forward * swim_speed;
+               move_direction_water = Vector3.zero;
+               move_direction_water += Input.GetAxis("Vertical") * transform.GetChild(0).forward * swim_speed;
+               move_direction_water += Input.GetAxis("Horizontal") * transform.GetChild(0).right * swim_speed;
 
-               }
-               else move_direction = Vector3.zero;
-              
+               move_direction_water.y -= swim_gravity;
 
-               CC.Move(move_direction * Time.deltaTime);
+               CC.Move(move_direction_water * Time.deltaTime);
+
           }
           else
           {
@@ -69,7 +68,7 @@ public class Player_Movement1: MonoBehaviour
      }
 
      //When user falls into some WHATAH
-     private void OnTriggerEnter(Collider other)
+     private void OnTriggerStay(Collider other)
      {
           if (other.tag == "Water")
                is_in_water = true;
