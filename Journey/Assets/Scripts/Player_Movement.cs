@@ -12,8 +12,10 @@ public class Player_Movement : MonoBehaviour
     public float acc_input_x = 0.2f, acc_input_z = 0.2f;
     public float curr_input_x = 0f, curr_input_z = 0f;
     float y_velocity = 0f;
-    public float y_gravity = 1.5f;
-    public float jump_velocity = 0.5f;
+    public float y_gravity = 0.8f;
+    public float jump_velocity = 0.3f;
+    public float groundCheck_dist = 1.2f;
+    Transform parent_obj;
     //Swimming
     public bool in_water = false;
 
@@ -58,10 +60,20 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cc.isGrounded) {
+        bool groundCheck = false;
+        RaycastHit ground;
+        if(Physics.Raycast(transform.position, -transform.up, out ground)) {
+            if (ground.distance < groundCheck_dist) {
+                groundCheck = true;
+            }
+        }
+
+        if (groundCheck) {
             y_velocity = 0;
+            if (parent_obj == null) { parent_obj = ground.collider.transform; }
         } else {
             y_velocity -= y_gravity * Time.deltaTime;
+            if (parent_obj != null) { parent_obj = null; }
         }
 
         if (in_water) { //Water movement
@@ -74,7 +86,7 @@ public class Player_Movement : MonoBehaviour
             cc.Move(dir);
         } else {
             //Jumping
-            if(Input.GetKeyDown(KeyCode.Space) && y_velocity == 0) {
+            if(Input.GetKeyDown(KeyCode.Space) && groundCheck) {
                 y_velocity = jump_velocity;
             }
             // Calculate the Direction to Move based on the tranform of the Player
@@ -84,6 +96,10 @@ public class Player_Movement : MonoBehaviour
             Vector3 distance = direction * Time.deltaTime; //Apply deltatime
             distance.y = y_velocity; //Apply Gravity
             cc.Move(distance); // Apply Movement to Player
+
+            if (parent_obj) {
+                //Add parent manipulation
+            }
         }
     }
 
