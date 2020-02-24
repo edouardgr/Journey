@@ -5,6 +5,7 @@ using UnityEngine;
 /*Edouard*/
 public class Weapon_Info : MonoBehaviour
 {
+    public Transform barrel_point;
     public bool unlocked = false; //Determine if the player can use it
     public int weapon_damage; //How much damage a bullet does
     public float bullet_force;

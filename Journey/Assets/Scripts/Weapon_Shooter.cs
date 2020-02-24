@@ -16,6 +16,7 @@ public class Weapon_Shooter : MonoBehaviour
 
     //Bullet hole
     public GameObject bullet_hole; //Prefab for bullet holes to be placed on objects
+    public GameObject bullet_trail;
     List<GameObject> bullet_hole_list = new List<GameObject>(); //List of all the created bullet holes
     public int max_bullet_holes = 100; //Max number of bullet holes that can exist, prevents lagging from too many bullet holes
 
@@ -40,8 +41,10 @@ public class Weapon_Shooter : MonoBehaviour
         Physics.Raycast(ray_origin.position, ray_origin.forward, out normal_hit); //Shoot ray to check if object is in range
 
         //Recticle enlargens when moving, to indicate worse accuracy when moving
-        float reticle_size = 40 + (Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)) * 20);
-        aim_reticle.sizeDelta = new Vector2(reticle_size, reticle_size);
+        if (aim_reticle) {
+            float reticle_size = 40 + (Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)) * 20);
+            aim_reticle.sizeDelta = new Vector2(reticle_size, reticle_size);
+        }
 
         //Weapon interaction
         if (!is_holding && manager.unlocked_count() > 0 && manager_ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //If no weapons are equiped, don't run
@@ -64,12 +67,19 @@ public class Weapon_Shooter : MonoBehaviour
 
                         if (spread_hit.collider.GetComponent<Rigidbody>() != null) { //Check if object has a rigidbody
                             spread_hit.collider.GetComponent<Rigidbody>().AddForceAtPosition(ray_origin.forward * manager.info.bullet_force, spread_hit.point, ForceMode.Impulse); //Add an impulse to the point of contact on the object
-                            spread_hit.collider.gameObject.AddComponent<Throwable_Obj>().hit_marker = hit_marker; //Flying objects will do damage
+                            if (hit_marker) { spread_hit.collider.gameObject.AddComponent<Throwable_Obj>().hit_marker = hit_marker; } //Flying objects will do damage
                             Debug.DrawLine(spread_hit.point, spread_hit.point - (ray_origin.forward * manager.info.bullet_force), Color.red, 10f); //Visual indicator of bullet impact and force applied
                         }
                     }
+                    GameObject line = Instantiate(bullet_trail); //Bullet trail - visual feedback
+                    line.GetComponent<LineRenderer>().SetPosition(0, manager.info.barrel_point.position); //From the barrel
+                    if (spread_hit.collider != null) {
+                        line.GetComponent<LineRenderer>().SetPosition(1, spread_hit.point); //To the contact point
+                    } else {
+                        line.GetComponent<LineRenderer>().SetPosition(1, ray_origin.position + (ray_origin.forward + new Vector3(randxy.x, randxy.y)) * 100f); //Trail into the distance
+                    }
                 }
-                if(hit_confirmed) { hit_marker.GetComponent<Animator>().Play("Hit"); }
+                if(hit_marker && hit_confirmed) { hit_marker.GetComponent<Animator>().Play("Hit"); }
             }
         }
 
@@ -112,7 +122,7 @@ public class Weapon_Shooter : MonoBehaviour
 
     void create_bullet_holes(RaycastHit ray) //Creates bullet decals on objects
     {
-        if (ray.collider.tag != "Enemy") { //Check that player has not shot a monster
+        if (ray.collider.tag != "Enemy" && ray.collider.tag != "Player") { //Check that player has not shot a monster
             GameObject obj = Instantiate(bullet_hole, ray.point, Quaternion.LookRotation(ray.normal), null); //Create bullet hole instance
             obj.transform.position += obj.transform.forward * 0.001f; //Slight offset, so there is not clipping with the wall
             obj.transform.parent = ray.collider.transform; //Set the bullet hole as child of the shot object, bullet move with moving walls
@@ -133,7 +143,7 @@ public class Weapon_Shooter : MonoBehaviour
         move_obj.GetComponent<Rigidbody>().velocity = Vector3.zero; //Reset velocity, stops the object from slamming into the ground
         move_obj.GetComponent<Rigidbody>().AddForce(ray_origin.forward * launch_speed, ForceMode.Impulse); //Add force to launch object
         if (!enable) {
-            move_obj.AddComponent<Throwable_Obj>().hit_marker = hit_marker;
+            if (hit_marker) { move_obj.AddComponent<Throwable_Obj>().hit_marker = hit_marker; }
             move_obj = null; /*Remove reference to held object*/
             manager.enable_weapons();
         }
