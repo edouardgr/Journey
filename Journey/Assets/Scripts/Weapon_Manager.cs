@@ -7,8 +7,9 @@ public class Weapon_Manager : MonoBehaviour
     public GameObject gun_pivot; //Gun_Pivot has all the guns as its children
     public int curr_index = -1; //Enables the selected weapon
     int max_index; //Highest value the index can go to
-    public Weapon_info info = null;
+    public Weapon_Info info = null;
     //float switch_delay = 0.5f; //Delay between switching guns, prevents quick spamming //FUTURE IDEA
+    bool weapons_enabled = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class Weapon_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!gun_pivot.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //Prevents quick swapping between weapons, remove for fun
+        if(!weapons_enabled || !gun_pivot.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idle")) { //Prevents quick swapping between weapons, remove for fun
             return;
         }
         
@@ -44,7 +45,7 @@ public class Weapon_Manager : MonoBehaviour
     public int unlocked_count() { //Return number of guns that are unlocked
         int count = 0;
         for(int i = 0; i < gun_pivot.transform.childCount; i++) { //Cycle through weapons
-            if(gun_pivot.transform.GetChild(0).GetComponent<Weapon_info>().unlocked) { //Check if unlocked
+            if(gun_pivot.transform.GetChild(i).GetComponent<Weapon_Info>().unlocked) { //Check if unlocked
                 count++;
             }
         }
@@ -57,7 +58,7 @@ public class Weapon_Manager : MonoBehaviour
             i += (search_up ? 1 : -1); //Increment or decrement based on parameter
             if (i < 0) { i = max_index - 1; }//Prevent index from going out of bounds
             i %= max_index; //Prevent index from going out of bounds
-            if (gun_pivot.transform.GetChild(i).GetComponent<Weapon_info>().unlocked) { //Check if weapon is unlocked 
+            if (gun_pivot.transform.GetChild(i).GetComponent<Weapon_Info>().unlocked) { //Check if weapon is unlocked 
                 break;
             }
         }
@@ -67,7 +68,7 @@ public class Weapon_Manager : MonoBehaviour
     }
 
     public void switch_weapon(int _index) {
-        if (_index >= max_index || _index < 0 || !gun_pivot.transform.GetChild(_index).GetComponent<Weapon_info>().unlocked) { //Prevents selection of index great than amount of weapons and that weapon is unlocked
+        if (_index >= max_index || _index < 0 || !gun_pivot.transform.GetChild(_index).GetComponent<Weapon_Info>().unlocked) { //Prevents selection of index great than amount of weapons and that weapon is unlocked
             return;
         }
         curr_index = _index; //Update current gun index to new index
@@ -76,7 +77,21 @@ public class Weapon_Manager : MonoBehaviour
             gun_pivot.transform.GetChild(i).gameObject.SetActive(false);
         }
         gun_pivot.transform.GetChild(curr_index).gameObject.SetActive(true); //Set the current index child to show
-        gun_pivot.GetComponent<Animator>().Play("Weapon_load", 0); //Play equiping animation for selected gun
-        info = gun_pivot.transform.GetChild(_index).GetComponent<Weapon_info>(); //Save the info attached to the selected weapon
+        gun_pivot.GetComponent<Animator>().Play("Weapon_load"); //Play equiping animation for selected gun
+        info = gun_pivot.transform.GetChild(_index).GetComponent<Weapon_Info>(); //Save the info attached to the selected weapon
+    }
+
+    public void disable_weapons()
+    {
+        for (int i = 0; i < max_index; i++) { //Cycle through guns and disable them all
+            gun_pivot.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        weapons_enabled = false;
+    }
+
+    public void enable_weapons()
+    {
+        switch_weapon(curr_index);
+        weapons_enabled = true;
     }
 }

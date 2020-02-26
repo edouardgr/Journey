@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Brain*/
 public class CameraController : MonoBehaviour
 {
      public float HorizontalSpeed = 4.0f;
      public float VerticalSpeed = 4.0f;
 
-    public float pitch_limit = 60f;
+     public float pitch_limit = 60f;
 
      private float yaw = 0.0f;
      private float pitch = 0.0f;
