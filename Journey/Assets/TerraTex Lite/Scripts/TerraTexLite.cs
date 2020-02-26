@@ -177,7 +177,7 @@ namespace TerraTexLite
 					float y_01 = (float)y / (float)terrainData.alphamapHeight;
 					float x_01 = (float)x / (float)terrainData.alphamapWidth;
 					//Get height and steepness
-					float height = terrainData.GetHeight(Mathf.RoundToInt(y_01 * terrainData.heightmapHeight), Mathf.RoundToInt(x_01 * terrainData.heightmapWidth));
+					float height = terrainData.GetHeight(Mathf.RoundToInt(y_01 * terrainData.heightmapResolution), Mathf.RoundToInt(x_01 * terrainData.heightmapResolution));
 					float steepness = terrainData.GetSteepness(y_01, x_01);
 
 					float weightSum = 0;
