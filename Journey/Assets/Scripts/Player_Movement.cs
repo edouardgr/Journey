@@ -106,7 +106,7 @@ public class Player_Movement : MonoBehaviour
 
             //Jumping
             if (Input.GetKeyDown(KeyCode.Space)) {
-                Debug.Log(fall_from_ledge + ", " + (time > 0));
+                //Debug.Log(fall_from_ledge + ", " + (time > 0));
                 if (groundCheck || (fall_from_ledge && time > 0)) {
                     y_velocity = jump_velocity; //Apply jump
                     fall_from_ledge = false;
