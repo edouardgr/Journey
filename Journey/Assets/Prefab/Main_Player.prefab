@@ -151,6 +151,7 @@ MonoBehaviour:
   spread_move_radius: 0.02
   bullet_amount: 1
   bullet_delay: 0
+  sound_radius: 20
 --- !u!1 &5474731148536486159
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +363,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5474731150052543086}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 336a0319b837bc24e99ccd3d84725f42, type: 3}
   m_Name: 
@@ -374,7 +375,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5474731150052543086}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e28381d9a1288ca489bff878bea0c1fe, type: 3}
   m_Name: 
@@ -418,6 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hit_marker: {fileID: 0}
   aim_reticle: {fileID: 0}
+  current_arena: {fileID: 0}
   bullet_hole: {fileID: 6651540336131142546, guid: 8e5671b65fe4c0947a1f854806a58311,
     type: 3}
   bullet_trail: {fileID: 7861737905146679436, guid: 3c75877575e93f640bd05db870f7dc36,
@@ -524,6 +526,7 @@ MonoBehaviour:
   spread_move_radius: 0.03
   bullet_amount: 5
   bullet_delay: 0
+  sound_radius: 40
 --- !u!1001 &1189091777998887390
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,8 +7,7 @@ public class Player_Movement : MonoBehaviour
 {
     CharacterController cc;
     public float cayote_time = 0.2f; //Cayote time
-    float time = 0f; //Timer
-    bool fall_from_ledge = false, fall_charge = false; //Variables related to cayote time
+    float time = 0f, c_time = 0f; //Timer
 
     //Maximum movement speed
     public float max_speed = 12f;
@@ -67,6 +66,7 @@ public class Player_Movement : MonoBehaviour
     {
         //Cayote time
         if(time >= 0) { time -= Time.deltaTime; } //Countdown
+        if(c_time >= 0) { c_time -= Time.deltaTime; }
 
         //GroundCheck
         bool groundCheck = false;
@@ -74,8 +74,7 @@ public class Player_Movement : MonoBehaviour
         if(Physics.Raycast(transform.position, -transform.up, out ground)) { //Shoot ray down to ground
             if (ground.distance < groundCheck_dist) { //Distance requirement to enable jumps
                 groundCheck = true;
-                fall_from_ledge = true;
-                fall_charge = false;
+                c_time = cayote_time;
             }
         }
 
@@ -98,18 +97,14 @@ public class Player_Movement : MonoBehaviour
             //Cayote Time - Period of time that lets you jump early
             if(time > 0 && groundCheck) {
                 y_velocity = jump_velocity;
-                fall_from_ledge = false;
-            } else if(!fall_charge && !groundCheck && fall_from_ledge && time <= 0) { //Cayote jump for falling
-                time = cayote_time;
-                fall_charge = true;
             }
 
             //Jumping
             if (Input.GetKeyDown(KeyCode.Space)) {
-                //Debug.Log(fall_from_ledge + ", " + (time > 0));
-                if (groundCheck || (fall_from_ledge && time > 0)) {
+                if (groundCheck || time > 0 || c_time > 0) {
                     y_velocity = jump_velocity; //Apply jump
-                    fall_from_ledge = false;
+                    time = 0;
+                    c_time = 0;
                 } else if (!groundCheck && time <= 0) {
                     time = cayote_time; //Set Cayote time
                 }

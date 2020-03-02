@@ -39,7 +39,7 @@ public class Enemy_Arena : MonoBehaviour, Shootable
         }
 
         if(sender.tag == "Player") {
-            master.Alert_nearby_enemies(gameObject, 40f, sender.transform);
+            master.Alert_nearby_enemies(transform, 40f, sender.transform);
         }
 
         if (info.health <= 0) { //Health depleted

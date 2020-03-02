@@ -80,7 +80,8 @@ public class Weapon_Shooter : MonoBehaviour
                         line.GetComponent<LineRenderer>().SetPosition(1, ray_origin.position + (ray_origin.forward + new Vector3(randxy.x, randxy.y)) * 100f); //Trail into the distance
                     }
                 }
-                if(hit_marker && hit_confirmed) { hit_marker.GetComponent<Animator>().Play("Hit"); }
+                if(hit_marker && hit_confirmed) { hit_marker.GetComponent<Animator>().Play("Hit"); } //Play hit marker ani if we hit a shootable enemy
+                if(current_arena) { current_arena.Alert_nearby_enemies(transform, manager.info.sound_radius, transform); }
             }
         }
 
@@ -118,6 +119,11 @@ public class Weapon_Shooter : MonoBehaviour
                 Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(0, manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z))), 0), out temp);
                 Handles.DrawWireDisc(normal_hit.point, normal_hit.normal, temp.point.y - normal_hit.point.y);
             }
+        }
+
+        if(manager && manager.info) {
+            Handles.color = Color.yellow;
+            Handles.DrawWireDisc(transform.position, transform.up, manager.info.sound_radius);
         }
     }
 

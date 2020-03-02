@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor;
 
+[RequireComponent(typeof(SphereCollider))]
 public class Arena_Master : MonoBehaviour
 {
     public Transform arena_center;
@@ -18,6 +19,10 @@ public class Arena_Master : MonoBehaviour
     void Start()
     {
         current_enemies = new List<Enemy_Arena>();
+        SphereCollider col = GetComponent<SphereCollider>();
+        col.center = arena_center.position;
+        col.radius = arena_distance;
+        col.isTrigger = true;
     }
 
     // Update is called once per frame
@@ -40,10 +45,10 @@ public class Arena_Master : MonoBehaviour
         Handles.DrawWireDisc(arena_center.position, arena_center.up, arena_distance);
     }
 
-    public void Alert_nearby_enemies(GameObject enemy, float radius, Transform target)
+    public void Alert_nearby_enemies(Transform origin_point, float radius, Transform target)
     {
         for(int i = 0; i < current_enemies.Count; i++) {
-            if(!current_enemies[i].target && current_enemies[i] != enemy && Vector3.Distance(current_enemies[i].transform.position, enemy.transform.position) < radius) {
+            if(!current_enemies[i].target && Vector3.Distance(current_enemies[i].transform.position, origin_point.transform.position) < radius) {
                 current_enemies[i].target = target;
                 current_enemies[i].state = Enemy_state.attacking;
             }
@@ -67,5 +72,19 @@ public class Arena_Master : MonoBehaviour
         }
         result = Vector3.zero;
         return false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player") {
+            other.GetComponent<Weapon_Shooter>().current_arena = this;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player") {
+            other.GetComponent<Weapon_Shooter>().current_arena = null;
+        }
     }
 }
