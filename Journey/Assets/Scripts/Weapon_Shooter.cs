@@ -11,8 +11,9 @@ public class Weapon_Shooter : MonoBehaviour
     Player_Movement movement; //Player movement
     RaycastHit spread_hit, normal_hit; 
     Transform ray_origin;
-    public Canvas hit_marker;
-    public RectTransform aim_reticle;
+    public Canvas hit_marker; //Hit marker of gun
+    public RectTransform aim_reticle; //Aiming reticle of player
+    public Arena_Master current_arena; //Get the current arena we are in
 
     //Bullet hole
     public GameObject bullet_hole; //Prefab for bullet holes to be placed on objects
@@ -41,9 +42,9 @@ public class Weapon_Shooter : MonoBehaviour
         Physics.Raycast(ray_origin.position, ray_origin.forward, out normal_hit); //Shoot ray to check if object is in range
 
         //Recticle enlargens when moving, to indicate worse accuracy when moving
-        if (aim_reticle) {
-            float reticle_size = 40 + (Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)) * 20);
-            aim_reticle.sizeDelta = new Vector2(reticle_size, reticle_size);
+        if (aim_reticle) { //ASK BRAIN
+           float reticle_size = 40 + (Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)) * 20);
+           aim_reticle.sizeDelta = new Vector2(reticle_size, reticle_size);
         }
 
         //Weapon interaction
