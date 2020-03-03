@@ -74,7 +74,7 @@ public class Weapon_Shooter : MonoBehaviour
                     }
                     GameObject line = Instantiate(bullet_trail); //Bullet trail - visual feedback
                     line.GetComponent<LineRenderer>().SetPosition(0, manager.info.barrel_point.position); //From the barrel
-                    if (spread_hit.collider != null) {
+                    if (spread_hit.collider != null && spread_hit.collider.tag != "Player") {
                         line.GetComponent<LineRenderer>().SetPosition(1, spread_hit.point); //To the contact point
                     } else {
                         line.GetComponent<LineRenderer>().SetPosition(1, ray_origin.position + (ray_origin.forward + new Vector3(randxy.x, randxy.y)) * 100f); //Trail into the distance
