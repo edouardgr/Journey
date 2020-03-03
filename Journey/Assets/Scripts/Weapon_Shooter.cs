@@ -59,7 +59,7 @@ public class Weapon_Shooter : MonoBehaviour
                 for (int i = 0; i < manager.info.bullet_amount; i++) { //Loop for each bullet that will be fired
                     Vector2 randxy = Random.insideUnitCircle * (manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)))); //Random point inside the spread radius
                     Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(randxy.x, randxy.y, 0), out spread_hit); //Shoot random point from the player, spread gets larger the further from the object, also the spread increases when moving
-                    if (spread_hit.collider != null) { //Check if ray has hit anything
+                    if (spread_hit.collider != null && spread_hit.collider.tag != "Player") { //Check if ray has hit anything
                         create_bullet_holes(spread_hit); //Create bullet hole at the position of ray intersect
                         if (spread_hit.collider.GetComponentInParent<Shootable>() != null) { //Detect if hit object has a shootable property
                             spread_hit.collider.GetComponentInParent<Shootable>().Damage(manager.info.weapon_damage, gameObject); //Active shootable property
@@ -92,7 +92,7 @@ public class Weapon_Shooter : MonoBehaviour
             } else if (Input.GetKeyDown(KeyCode.E)) { //Drop button pressed
                 set_holding_obj("Default", false, null, 0f);
             } else { //Currently holding object
-                RaycastHit pos;
+                RaycastHit pos; //FIX PHYX OBJECT FREAKING OUT
                 move_obj.transform.position = Vector3.Lerp(move_obj.transform.position, (Physics.Raycast(ray_origin.position, ray_origin.forward, out pos, move_reach) ? pos.point : ray_origin.position + (ray_origin.forward * move_reach)), Time.deltaTime * 100f); //Set distance to max reach
             }
         } else {
@@ -129,7 +129,7 @@ public class Weapon_Shooter : MonoBehaviour
 
     void create_bullet_holes(RaycastHit ray) //Creates bullet decals on objects
     {
-        if (ray.collider.tag != "Enemy" && ray.collider.tag != "Player") { //Check that player has not shot a monster
+        if (ray.collider.tag != "Enemy") { //Check that player has not shot a monster
             GameObject obj = Instantiate(bullet_hole, ray.point, Quaternion.LookRotation(ray.normal), null); //Create bullet hole instance
             obj.transform.position += obj.transform.forward * 0.001f; //Slight offset, so there is not clipping with the wall
             obj.transform.parent = ray.collider.transform; //Set the bullet hole as child of the shot object, bullet move with moving walls
@@ -143,7 +143,7 @@ public class Weapon_Shooter : MonoBehaviour
 
     void set_holding_obj(string layer, bool enable, GameObject obj, float launch_speed)
     {
-        if(enable) { move_obj = obj; /*Set reference to held object*/ }
+        if(enable) { move_obj = obj; obj.transform.SetParent(ray_origin); /*Set reference to held object and set parent of object*/ }
         move_obj.layer = LayerMask.NameToLayer(layer); //Set layer to default so it can be interacted with again
         move_obj.GetComponent<Rigidbody>().freezeRotation = enable; //Freeze rotation
         move_obj.GetComponent<Rigidbody>().useGravity = !enable; //Disable or enable gravity
@@ -151,6 +151,7 @@ public class Weapon_Shooter : MonoBehaviour
         move_obj.GetComponent<Rigidbody>().AddForce(ray_origin.forward * launch_speed, ForceMode.Impulse); //Add force to launch object
         if (!enable) {
             if (hit_marker) { move_obj.AddComponent<Throwable_Obj>().hit_marker = hit_marker; }
+            move_obj.transform.SetParent(null); //Remove parent
             move_obj = null; /*Remove reference to held object*/
             manager.enable_weapons();
         }

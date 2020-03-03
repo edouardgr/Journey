@@ -12,6 +12,7 @@ public class Arena_Master : MonoBehaviour
     [Header("Enemy Spawning")]
     public int max_enemies; //Max amount of enemies allowed into the arena
     public List<Enemy_Arena> current_enemies; //Current amount of numbers in the scene
+    public List<Enemy_Arena> despawn_list; //List of enemies that are despawning
     public int enemy_tickets; //Number of enemies that will be spawned over time
     public GameObject[] enemies; //List of enemies to spawn
 
@@ -31,10 +32,20 @@ public class Arena_Master : MonoBehaviour
         if(current_enemies.Count < max_enemies && enemy_tickets > 0) {
             Vector3 point;
             if(RandomPoint(out point)) {
-                GameObject enemy = Instantiate(enemies[0], point, transform.rotation, null);
+                GameObject enemy = Instantiate(enemies[0], point, Quaternion.AngleAxis(Random.value * 360, transform.up), null);
                 enemy.GetComponent<Enemy_Arena>().master = this;
+                enemy.GetComponent<Enemy_Arena>().Spawn();
                 current_enemies.Add(enemy.GetComponent<Enemy_Arena>());
                 enemy_tickets--;
+            }
+        }
+
+        if(despawn_list.Count > 0) {
+            for(int i = 0; i < despawn_list.Count; i++) {
+                if(despawn_list[i].time_dir == 0) {
+                    Destroy(despawn_list[i]); //Destroy enemy
+                    despawn_list.RemoveAt(i); //Remove from enemy list
+                }
             }
         }
     }

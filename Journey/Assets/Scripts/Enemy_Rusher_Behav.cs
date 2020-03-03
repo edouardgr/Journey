@@ -10,8 +10,13 @@ public class Enemy_Rusher_Behav : Enemy_Arena
     public float detection_time;
 
     // Update is called once per frame
-    void Update()
+    private new void Update()
     {
+        base.Update();
+        if(time_dir != 0) {
+            return;
+        }
+        
         //------------------Idle-------------------
         if (state == Enemy_state.idle) {
             if (agent.remainingDistance < agent.stoppingDistance) {
@@ -30,7 +35,7 @@ public class Enemy_Rusher_Behav : Enemy_Arena
                     for(int j = 0; j < a.Length; j++) {
                         if(a[j].transform.tag == "Player") {
                             Debug.DrawLine(transform.position, detected_target.transform.position, Color.red);
-                            base.target = detected_target;
+                            target = detected_target;
                             state = Enemy_state.attacking;
                         }
                     }

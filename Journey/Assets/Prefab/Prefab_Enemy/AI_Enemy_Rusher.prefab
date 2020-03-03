@@ -135,6 +135,8 @@ MonoBehaviour:
   state: 0
   stopping_distance: 2
   target: {fileID: 0}
+  spawn_time: 1
+  time: 0
   detection_time: 0
 --- !u!114 &6895456179458333807
 MonoBehaviour:
