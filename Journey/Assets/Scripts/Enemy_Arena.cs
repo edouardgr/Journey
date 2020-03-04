@@ -11,11 +11,13 @@ public class Enemy_Arena : MonoBehaviour, Shootable
     public Enemy_state state; //Current state of the Enemy
     protected Enemy_Info info; //Info related to the spawned enemy
     protected NavMeshAgent agent;
-    public float stopping_distance = 2f;
+    public float stopping_distance = 3f;
     public Transform target;
 
-    public float spawn_time = 1;
-    public int time_dir = 0;
+    public float spawn_time = 1f; //Time it takes to spawn and despawn
+    [HideInInspector]
+    public int time_dir = 0; //Counting up or down
+    [HideInInspector]
     public float time;
     MeshRenderer mr;
 
@@ -49,7 +51,7 @@ public class Enemy_Arena : MonoBehaviour, Shootable
         info.health -= amount; //Apply damage
 
         if(target == null) { //If player has not been detected yet
-            state = Enemy_state.attacking;
+            state = Enemy_state.chase;
             target = sender.transform; //Set target
         }
 
@@ -62,6 +64,12 @@ public class Enemy_Arena : MonoBehaviour, Shootable
             master.despawn_list.Add(this);
             master.current_enemies.Remove(this);//Move from active list to despawn list
         }
+    }
+
+    public bool Within_angle(Transform obj, Transform target, Enemy_Info info)
+    {
+        Vector3 dirToTarget = (target.position - transform.position).normalized;
+        return Vector3.Angle(obj.forward, dirToTarget) < info.field_of_view_angle / 2;
     }
 
     public void Spawn()
@@ -79,5 +87,5 @@ public class Enemy_Arena : MonoBehaviour, Shootable
 
 public enum Enemy_state
 {
-    idle, chasing, attacking
+    idle, chase, attack
 }

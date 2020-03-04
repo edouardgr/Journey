@@ -21,7 +21,7 @@ public class Arena_Master : MonoBehaviour
     {
         current_enemies = new List<Enemy_Arena>();
         SphereCollider col = GetComponent<SphereCollider>();
-        col.center = arena_center.position;
+        col.center = arena_center.localPosition;
         col.radius = arena_distance;
         col.isTrigger = true;
     }
@@ -43,8 +43,9 @@ public class Arena_Master : MonoBehaviour
         if(despawn_list.Count > 0) {
             for(int i = 0; i < despawn_list.Count; i++) {
                 if(despawn_list[i].time_dir == 0) {
-                    Destroy(despawn_list[i]); //Destroy enemy
+                    Enemy_Arena ea = despawn_list[i]; //Get reference to (about to be) Destoyed object
                     despawn_list.RemoveAt(i); //Remove from enemy list
+                    Destroy(ea.gameObject); //Destroy enemy
                 }
             }
         }
@@ -61,7 +62,7 @@ public class Arena_Master : MonoBehaviour
         for(int i = 0; i < current_enemies.Count; i++) {
             if(!current_enemies[i].target && Vector3.Distance(current_enemies[i].transform.position, origin_point.transform.position) < radius) {
                 current_enemies[i].target = target;
-                current_enemies[i].state = Enemy_state.attacking;
+                current_enemies[i].state = Enemy_state.chase;
             }
         }
     }

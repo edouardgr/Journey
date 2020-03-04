@@ -133,11 +133,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   master: {fileID: 0}
   state: 0
-  stopping_distance: 2
+  stopping_distance: 3
   target: {fileID: 0}
   spawn_time: 1
+  time_dir: 0
   time: 0
-  detection_time: 0
+  attack_radius: 2
+  attack_time: 0.5
 --- !u!114 &6895456179458333807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +156,6 @@ MonoBehaviour:
   move_speed: 8
   projectile_speed: 0
   projectile_fire_rate: 0
-  projectile_damage: 0
+  projectile_damage: 10
   field_of_view_angle: 50
   field_of_view_distance: 20
