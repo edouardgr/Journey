@@ -6,9 +6,15 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
     CharacterController cc;
+
+    [Header("General")]
+    public bool is_enabled = true;
+
+    [Header("Cayote Time")]
     public float cayote_time = 0.2f; //Cayote time
     float time = 0f, c_time = 0f; //Timer
 
+    [Header("Movement")]
     //Maximum movement speed
     public float max_speed = 12f;
 
@@ -16,10 +22,13 @@ public class Player_Movement : MonoBehaviour
     public float acc_input_x = 0.2f, acc_input_z = 0.2f;
     public float curr_input_x = 0f, curr_input_z = 0f;
     float y_velocity = 0f;
+
+    [Header("Gravity & Jump")]
     public float y_gravity = 0.8f;
     public float jump_velocity = 0.3f;
     public float groundCheck_dist = 1.2f;
 
+    [Header("Swimming")]
     //Swimming
     public bool in_water = false;
 
@@ -32,9 +41,12 @@ public class Player_Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(!is_enabled) {
+        }
+
         // Get Horizontal and Vertical Input
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
+        float horizontalInput = (is_enabled ? Input.GetAxisRaw("Horizontal") : 0);
+        float verticalInput = (is_enabled ? Input.GetAxisRaw("Vertical") : 0);
 
         //Forward movement
         if (verticalInput != 0f) {
@@ -100,7 +112,7 @@ public class Player_Movement : MonoBehaviour
             }
 
             //Jumping
-            if (Input.GetKeyDown(KeyCode.Space)) {
+            if (is_enabled && Input.GetKeyDown(KeyCode.Space)) {
                 if (groundCheck || time > 0 || c_time > 0) {
                     y_velocity = jump_velocity; //Apply jump
                     time = 0;
