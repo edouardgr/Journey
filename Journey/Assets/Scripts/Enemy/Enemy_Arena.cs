@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEditor;
 
 [System.Serializable]
-public class Enemy_Arena : MonoBehaviour, Shootable
+public abstract class Enemy_Arena : MonoBehaviour, Shootable
 {
+    [Header("Parent")]
     [HideInInspector]
     public Arena_Master master; //Arena master reference, [HideInInspector] is to stop anyone from replacing it
     public Enemy_state state; //Current state of the Enemy
     protected Enemy_Info info; //Info related to the spawned enemy
     protected NavMeshAgent agent;
     public float stopping_distance = 3f;
+    public float alert_when_shot = 40f;
+    public float alert_chase_radius = 10f;
     public Transform target;
 
     public float spawn_time = 1f; //Time it takes to spawn and despawn
@@ -56,14 +60,35 @@ public class Enemy_Arena : MonoBehaviour, Shootable
         }
 
         if(sender != null && sender.tag == "Player") {
-            master.Alert_nearby_enemies(transform, 40f, sender.transform);
+            master.Alert_nearby_enemies(transform, alert_when_shot, sender.transform);
         }
 
         if (info.health <= 0) { //Health depleted & despawn
             DeSpawn(); //Start despawn
+            agent.isStopped = true;
             master.despawn_list.Add(this);
             master.current_enemies.Remove(this);//Move from active list to despawn list
         }
+    }
+
+    public List<Transform> FOV_Detection(Enemy_Info info)
+    {
+        //Detecting Player
+        List<Transform> list = new List<Transform>();
+        Collider[] view_objs = Physics.OverlapSphere(transform.position, info.field_of_view_distance);
+        foreach (Collider obj in view_objs) {
+            Transform detected_target = obj.transform;
+            if (Within_angle(transform, detected_target, info)) {
+                RaycastHit[] hits = Physics.RaycastAll(transform.position, (detected_target.position - transform.position).normalized, Vector3.Distance(transform.position, detected_target.position));
+                foreach (RaycastHit hit in hits) {
+                    if (hit.transform.tag != "Untagged") {
+                        Debug.DrawLine(transform.position, detected_target.transform.position, Color.red);
+                        list.Add(hit.transform);
+                    }
+                }
+            }
+        }
+        return list;
     }
 
     public bool Within_angle(Transform obj, Transform target, Enemy_Info info)
@@ -82,6 +107,13 @@ public class Enemy_Arena : MonoBehaviour, Shootable
     {
         time_dir = 1;
         time = 0;
+    }
+
+    public void OnDrawGizmos()
+    {
+        //Alert when shot radius
+        Handles.color = Color.cyan - new Color(0, 0, 0, 0.75f);
+        Handles.DrawWireDisc(transform.position, transform.up, alert_when_shot);
     }
 }
 

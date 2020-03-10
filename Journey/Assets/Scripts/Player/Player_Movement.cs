@@ -41,9 +41,6 @@ public class Player_Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!is_enabled) {
-        }
-
         // Get Horizontal and Vertical Input
         float horizontalInput = (is_enabled ? Input.GetAxisRaw("Horizontal") : 0);
         float verticalInput = (is_enabled ? Input.GetAxisRaw("Vertical") : 0);
@@ -95,6 +92,11 @@ public class Player_Movement : MonoBehaviour
             y_velocity = 0;
         } else {
             y_velocity -= y_gravity * Time.deltaTime;
+        }
+
+        //Prevent player from being stuck in one spot
+        if(!is_enabled) {
+            return;
         }
 
         if (in_water) { //Water movement

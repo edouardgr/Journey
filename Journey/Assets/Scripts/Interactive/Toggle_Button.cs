@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Toggle_Button : Interactive
 {
-     CharacterController Controller;
-     public float Speed = 3.0f;
-     public float JumpSpeed = 8.0f;
-     public float Gravity = 20.0f;
+    public override void enable()
+    {
+        return;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-           
         
     }
 

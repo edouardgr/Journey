@@ -27,21 +27,16 @@ public class Enemy_Rusher_Behav : Enemy_Arena
                     agent.destination = point;
                 }
             }
-            //Detecting Player
-            Collider[] view_objs = Physics.OverlapSphere(transform.position, info.field_of_view_distance);
-            for (int i = 0; i < view_objs.Length; i++) {
-                Transform detected_target = view_objs[i].transform;
-                if (Within_angle(transform, detected_target, info)) {
-                    RaycastHit[] a = Physics.RaycastAll(transform.position, (detected_target.position - transform.position).normalized, Vector3.Distance(transform.position, detected_target.position));
-                    for(int j = 0; j < a.Length; j++) {
-                        if(a[j].transform.tag == "Player") {
-                            Debug.DrawLine(transform.position, detected_target.transform.position, Color.red);
-                            target = detected_target;
-                            state = Enemy_state.chase;
-                        }
-                    }
+
+            List<Transform> list = FOV_Detection(info);
+            foreach (Transform item in list) {
+                if (item.tag == "Player") {
+                    target = item;
+                    state = Enemy_state.chase;
+                    break;
                 }
             }
+
         } else if(state == Enemy_state.chase) {
             agent.destination = target.position;
             if(Vector3.Distance(transform.position, target.position) <= stopping_distance) { //Get ready to attack target as it in attack range
@@ -74,13 +69,18 @@ public class Enemy_Rusher_Behav : Enemy_Arena
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2);
     }
 
-    private void OnDrawGizmos()
+    private new void OnDrawGizmos()
     {
+        base.OnDrawGizmos();
         if (agent != null) {
+            //Draw Field of vision
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, transform.position + ((transform.forward + AngleDirection(info.field_of_view_angle, false)) * (info.field_of_view_distance / 2)));
             Gizmos.DrawLine(transform.position, transform.position + ((transform.forward + AngleDirection(-info.field_of_view_angle, false)) * (info.field_of_view_distance / 2)));
 
+
+
+            //Draw Destination
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(agent.destination, 1f); //Draw Destination
             Handles.color = Color.blue;

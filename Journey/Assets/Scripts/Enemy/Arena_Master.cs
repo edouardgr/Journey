@@ -16,6 +16,8 @@ public class Arena_Master : MonoBehaviour
     public int enemy_tickets; //Number of enemies that will be spawned over time
     public GameObject[] enemies; //List of enemies to spawn
 
+    //IMPLEMENT ENEMIES ARE POINTED TO A POSITION AROUND THE PLAYER IN A CIRCULAR WAY TO AVOID CLUSTERING
+
     // Start is called before the first frame update
     void Start()
     {
