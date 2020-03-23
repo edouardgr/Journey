@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &957782662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 957782663}
+  m_Layer: 0
+  m_Name: Barrel_Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &957782663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957782662}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.13, z: -0.256}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2924576411745810204}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1137580324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137580325}
+  m_Layer: 0
+  m_Name: Barrel_Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1137580325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137580324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0024, y: 0.107, z: -1.0602}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6195321835218776772}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1836066910
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad09fcb20eeab5547aea6654f3d81cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barrel_point: {fileID: 957782663}
   unlocked: 0
   weapon_damage: 10
   bullet_force: 10
@@ -90,6 +151,7 @@ MonoBehaviour:
   spread_move_radius: 0.02
   bullet_amount: 1
   bullet_delay: 0
+  sound_radius: 20
 --- !u!1 &5474731148536486159
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +280,7 @@ GameObject:
   - component: {fileID: 5474731150052543084}
   - component: {fileID: 5474731150052543087}
   - component: {fileID: 5474731150052543072}
+  - component: {fileID: 5079017403843002289}
   - component: {fileID: 1582049615041966858}
   - component: {fileID: 6511725926520545399}
   - component: {fileID: 130294806050093417}
@@ -293,6 +356,18 @@ MonoBehaviour:
   HorizontalSpeed: 4
   VerticalSpeed: 4
   pitch_limit: 90
+--- !u!114 &5079017403843002289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474731150052543086}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 336a0319b837bc24e99ccd3d84725f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1582049615041966858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,11 +380,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28381d9a1288ca489bff878bea0c1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cayote_time: 0.2
   max_speed: 12
   acc_input_x: 0.2
   acc_input_z: 0.2
   curr_input_x: 0
   curr_input_z: 0
+  y_gravity: 0.8
+  jump_velocity: 0.3
+  groundCheck_dist: 1.2
   in_water: 0
 --- !u!114 &6511725926520545399
 MonoBehaviour:
@@ -339,7 +418,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit_marker: {fileID: 0}
+  aim_reticle: {fileID: 0}
+  current_arena: {fileID: 0}
   bullet_hole: {fileID: 6651540336131142546, guid: 8e5671b65fe4c0947a1f854806a58311,
+    type: 3}
+  bullet_trail: {fileID: 7861737905146679436, guid: 3c75877575e93f640bd05db870f7dc36,
     type: 3}
   max_bullet_holes: 100
   move_reach: 4
@@ -435,6 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad09fcb20eeab5547aea6654f3d81cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barrel_point: {fileID: 1137580325}
   unlocked: 1
   weapon_damage: 5
   bullet_force: 10
@@ -442,6 +526,7 @@ MonoBehaviour:
   spread_move_radius: 0.03
   bullet_amount: 5
   bullet_delay: 0
+  sound_radius: 40
 --- !u!1001 &1189091777998887390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -512,7 +597,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 18b539e0bb07cb947a600656aa713fcf,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18b539e0bb07cb947a600656aa713fcf, type: 3}
@@ -598,7 +683,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 2195c1e8d2713d149b6375f6ca0830a8,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2195c1e8d2713d149b6375f6ca0830a8, type: 3}
