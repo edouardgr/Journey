@@ -5,9 +5,11 @@ using System.Collections;
 public class PointClickPlacementTool : EditorWindow
 {
 	public static PointClickPlacementTool window;
-	static SceneView.OnSceneFunc onSceneGUIFunc;
+#pragma warning disable CS0618 // Type or member is obsolete
+    static SceneView.OnSceneFunc onSceneGUIFunc;
+#pragma warning restore CS0618 // Type or member is obsolete
 
-	private bool enableHelp = false;
+    private bool enableHelp = false;
 	private bool enabled = false;
 	private bool useNormalRotation = false;
 	private bool showPreview = false;
@@ -33,13 +35,17 @@ public class PointClickPlacementTool : EditorWindow
 	void OnEnable()
 	{
 		onSceneGUIFunc = this.OnSceneGUI;
-		SceneView.onSceneGUIDelegate += onSceneGUIFunc;
-	}
+#pragma warning disable CS0618 // Type or member is obsolete
+        SceneView.onSceneGUIDelegate += onSceneGUIFunc;
+#pragma warning restore CS0618 // Type or member is obsolete
+    }
 
 	void OnDestroy()
 	{
-		SceneView.onSceneGUIDelegate -= onSceneGUIFunc;
-	}
+#pragma warning disable CS0618 // Type or member is obsolete
+        SceneView.onSceneGUIDelegate -= onSceneGUIFunc;
+#pragma warning restore CS0618 // Type or member is obsolete
+    }
 
 	public void OnSceneGUI(SceneView sceneView)
 	{

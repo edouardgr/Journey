@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5166994086107992446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485077f7ca519a547b5d9d14b4df036e, type: 3}
+  m_Name: Init
+  m_EditorClassIdentifier: 
+  is_protected: 1
+  position: {x: 100, y: 177}
+  size: {x: 100, y: 100}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  next_node: {fileID: 0}
+--- !u!114 &-3727857186050086723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31526821fc349c24cafeb3fa0b51a22a, type: 3}
+  m_Name: Exit
+  m_EditorClassIdentifier: 
+  is_protected: 1
+  position: {x: 672, y: 48}
+  size: {x: 100, y: 100}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  next_node: {fileID: 0}
+--- !u!114 &-167327225952241592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccd7fac2990710c498c9679ced6f93c6, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  is_protected: 0
+  position: {x: 297, y: 78}
+  size: {x: 100, y: 100}
+  color: {r: 0, g: 0, b: 1, a: 1}
+  next_node: {fileID: -3727857186050086723}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945399860b2c44f4992aae4a27c6eade, type: 3}
+  m_Name: NewGraph 94.89014
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -5166994086107992446}
+  - {fileID: -3727857186050086723}
+  - {fileID: -167327225952241592}
