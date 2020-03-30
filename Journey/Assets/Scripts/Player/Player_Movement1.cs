@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Movement1: MonoBehaviour
+public class Player_Movement1 : MonoBehaviour
 {
- 
-      float speed = 12.0f;
-      float jump_speed = 9.0f;
-      float gravity = 20.0f;
-     
-      float swim_speed = 12f;
-      float swim_gravity = 3f;
-      bool is_in_water = false;
 
-      Vector3 move_direction = Vector3.zero;
-      Vector3 move_direction_water = Vector3.zero;
-      CharacterController CC;
+     float speed = 12.0f;
+     float jump_speed = 9.0f;
+     float gravity = 20.0f;
+     public bool launch = false;
+
+     float swim_speed = 12f;
+     float swim_gravity = 3f;
+     bool is_in_water = false;
+
+     public Vector3 move_direction = Vector3.zero;
+     Vector3 move_direction_water = Vector3.zero;
+     CharacterController CC;
 
 
      void Start()
@@ -27,7 +28,8 @@ public class Player_Movement1: MonoBehaviour
 
      void Update()
      {
-          if (is_in_water) {
+          if (is_in_water)
+          {
                move_direction_water = Vector3.zero;
                move_direction_water += Input.GetAxis("Vertical") * transform.GetChild(0).forward * swim_speed;
                move_direction_water += Input.GetAxis("Horizontal") * transform.GetChild(0).right * swim_speed;
@@ -40,7 +42,7 @@ public class Player_Movement1: MonoBehaviour
           else
           {
 
-               if (CC.isGrounded)
+               if (CC.isGrounded && !launch)
                {
 
                     move_direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -52,9 +54,11 @@ public class Player_Movement1: MonoBehaviour
                          move_direction.y = jump_speed;
 
                     }
+
                }
                else
                {
+                    launch = false;
                     move_direction = new Vector3(Input.GetAxis("Horizontal"), move_direction.y, Input.GetAxis("Vertical"));
                     move_direction = transform.TransformDirection(move_direction);
                     move_direction.x *= speed;
@@ -64,21 +68,22 @@ public class Player_Movement1: MonoBehaviour
                move_direction.y -= gravity * Time.deltaTime;
                CC.Move(move_direction * Time.deltaTime);
           }
-   
+
      }
 
-     //When user falls into some WHATAH
+     //When user falls into some water
      private void OnTriggerStay(Collider other)
      {
           if (other.tag == "Water")
                is_in_water = true;
-          
+
      }
-     //When user jumps out of some WHATAH
+     //When user jumps out of some water
      private void OnTriggerExit(Collider other)
      {
-          if(other.tag == "Water")
+          if (other.tag == "Water")
                is_in_water = false;
-          
+
      }
 }
+
