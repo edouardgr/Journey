@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Journey/Assets/Animations/SawedOff.meta
+guid: 344bcdfb72c956d43aef696fcac7ffc9
+=======
 guid: fcaa8195666037a46a87ec01a396d205
+>>>>>>> master:Journey/Assets/Animations/IK.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
