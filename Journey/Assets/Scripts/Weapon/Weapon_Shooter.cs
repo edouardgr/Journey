@@ -14,6 +14,7 @@ public class Weapon_Shooter : MonoBehaviour
     public Canvas hit_marker; //Hit marker of gun
     public RectTransform aim_reticle; //Aiming reticle of player
     public Arena_Master current_arena; //Get the current arena we are in
+    AudioSource audio_clip;
 
     //Bullet hole
     public GameObject bullet_hole; //Prefab for bullet holes to be placed on objects
@@ -34,6 +35,7 @@ public class Weapon_Shooter : MonoBehaviour
         movement = GetComponent<Player_Movement>(); //Reference to player movement
         ray_origin = transform.GetChild(0).transform; //Get the aiming point of fps
         manager_ani = manager.gun_pivot.GetComponent<Animator>();
+        audio_clip = GetComponent<AudioSource>(); //sound stuff
     }
 
     // Update is called once per frame
@@ -54,7 +56,11 @@ public class Weapon_Shooter : MonoBehaviour
                 if (ani != null) {
                     ani.Play("Fire", 0); //Play firing animation for the equiped weapon
                 }
-
+                //Sound stuff
+                if (manager.info.sound != null){
+                    audio_clip.clip = manager.info.sound;
+                    audio_clip.Play();
+                }
                 bool hit_confirmed = false;
                 for (int i = 0; i < manager.info.bullet_amount; i++) { //Loop for each bullet that will be fired
                     Vector2 randxy = Random.insideUnitCircle * (manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)))); //Random point inside the spread radius
