@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CameraController">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <Members>
+      <Field Name="VerticalSpeed" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAAQAAAAAAAAAAAAAAAQAIAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\CameraController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player_Aim">
+    <Position X="2.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAiAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Player_Aim.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player_Info" BaseTypeListCollapsed="true">
+    <Position X="4" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAACAACQAAIBAAAAAEAQAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Player_Info.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Player_Movement">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQBUABEAgAAUBAAAAAAQAAAAAAAIIBAQEAAAAAAEEA=</HashCode>
+      <FileName>Assets\Scripts\Player\Player_Movement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player_Movement_Rigid">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAQAREAgAAUBAEAAAAQAAAAAAAAIAEREAAAAAAEEA=</HashCode>
+      <FileName>Assets\Scripts\Player\Player_Movement_Rigid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player_Movement1">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAkAACIIABAQAAIAAAABAAAAQYAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Player_Movement1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="6.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bullet_Properties" Collapsed="true">
+    <Position X="12" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Bullet_Properties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bullet_Trail_Behav">
+    <Position X="14" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Bullet_Trail_Behav.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Throwable_Obj" Collapsed="true">
+    <Position X="20.5" Y="3.5" Width="1.5" />
+    <InheritanceLine Type="UnityEngine.MonoBehaviour" FixedToPoint="true">
+      <Path>
+        <Point X="7.25" Y="1.441" />
+        <Point X="7.25" Y="1.875" />
+        <Point X="22.375" Y="1.875" />
+        <Point X="22.375" Y="3.875" />
+        <Point X="22" Y="3.875" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>EAAAAAQAACAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Throwable_Obj.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon_Bob" Collapsed="true">
+    <Position X="14.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACDAAAAAABAAAACAABAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Weapon_Bob.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon_Info" Collapsed="true">
+    <Position X="16.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAKAAQAAAEEAAAAAAAAADAAAEAAAEAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Weapon_Info.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon_Manager">
+    <Position X="18.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQSAACAAACgAAAAAAAAAAIAAQgAgAAAAQAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Weapon_Manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon_Pickup">
+    <Position X="17.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAEAAAAAgAAAAAAAAAAAAAECAAIAACAQAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Weapon_Pickup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon_Shooter">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAREAAACIQAEAABAAAAAAAAMADAcQAIAAAAAAAAIAUA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Weapon_Shooter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon_Sway">
+    <Position X="16" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAIAAAAACAABAAAAAAAQAAABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Weapon_Sway.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AudioManager">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAgAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\AudioManager\AudioManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="sounds" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sound">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAEAEAgAAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\AudioManager\Sound.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenu">
+    <Position X="10.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Shootable">
+    <Position X="20.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Shootable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
