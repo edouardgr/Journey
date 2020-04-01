@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class rotate : MonoBehaviour
+public class Rotate_LP : MonoBehaviour
 {
-    // Start is called before the first frame update
-
+      int speed = 7;
 
     // Update is called once per frame
     void Update()
     {
-          transform.Rotate(transform.forward * 5, Space.World);
+          transform.Rotate(Vector3.forward * speed * Time.deltaTime * 100);
     }
 }

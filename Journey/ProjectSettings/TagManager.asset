@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Movable
   - Water
+  - Launch Pad
   layers:
   - Default
   - TransparentFX
