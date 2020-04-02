@@ -15,6 +15,8 @@ public class Arena_Master : MonoBehaviour
     public List<Enemy_Arena> despawn_list; //List of enemies that are despawning
     public int enemy_tickets; //Number of enemies that will be spawned over time
     public GameObject[] enemies; //List of enemies to spawn
+    public bool enemies_alerted = false; //Value tells when gates should close
+    public GameObject[] gates;
 
     //IMPLEMENT ENEMIES ARE POINTED TO A POSITION AROUND THE PLAYER IN A CIRCULAR WAY TO AVOID CLUSTERING
 
@@ -40,6 +42,10 @@ public class Arena_Master : MonoBehaviour
                 current_enemies.Add(enemy.GetComponent<Enemy_Arena>());
                 enemy_tickets--;
             }
+        } 
+        
+        if (enemy_tickets <= 0 && current_enemies.Count <= 0) {
+            Toggle_Gates(false);
         }
 
         if(despawn_list.Count > 0) {
@@ -61,10 +67,22 @@ public class Arena_Master : MonoBehaviour
 
     public void Alert_nearby_enemies(Transform origin_point, float radius, Transform target)
     {
-        for(int i = 0; i < current_enemies.Count; i++) {
+        Toggle_Gates(true);
+        for (int i = 0; i < current_enemies.Count; i++) {
             if(!current_enemies[i].target && Vector3.Distance(current_enemies[i].transform.position, origin_point.transform.position) < radius) {
                 current_enemies[i].target = target;
                 current_enemies[i].state = Enemy_state.chase;
+            }
+        }
+    }
+
+    public void Toggle_Gates(bool enabled) //False = Open, True = Close
+    {
+        foreach (GameObject gate in gates) {
+            if (enabled) {
+                gate.GetComponent<Gate_Control>().Close_Gate();
+            } else {
+                gate.GetComponent<Gate_Control>().Open_Gate();
             }
         }
     }
