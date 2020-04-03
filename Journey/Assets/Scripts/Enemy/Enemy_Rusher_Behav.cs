@@ -33,6 +33,7 @@ public class Enemy_Rusher_Behav : Enemy_Arena
                 if (item.tag == "Player") {
                     target = item;
                     state = Enemy_state.chase;
+                    master.Toggle_Gates(true);
                     break;
                 }
             }

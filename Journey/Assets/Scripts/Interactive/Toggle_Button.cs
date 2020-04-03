@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Toggle_Button : Interactive
+public class Toggle_Button : MonoBehaviour, Interactive
 {
-    public override void enable()
+    public void enable()
     {
         return;
     }

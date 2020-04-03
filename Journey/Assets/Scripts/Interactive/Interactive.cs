@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-
-public abstract class Interactive : MonoBehaviour
+﻿public interface Interactive
 {
-    public bool is_active;
-
-    public abstract void enable();
+    void enable();
 }
