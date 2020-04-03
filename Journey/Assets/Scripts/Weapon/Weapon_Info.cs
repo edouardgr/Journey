@@ -14,4 +14,5 @@ public class Weapon_Info : MonoBehaviour
     public int bullet_amount; //Amount of bullet that will be shot in a single fire
     public float bullet_delay; //Delay between each fired bullet
     public float sound_radius; //Distance sound will travel and alert enemies
+    public AudioClip sound; //Sound things
 }

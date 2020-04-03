@@ -487,11 +487,11 @@ GameObject:
   - component: {fileID: 370227053722440879}
   m_Layer: 0
   m_Name: m_glock_0
-  m_TagString: Untagged
+  m_TagString: Glock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5266200971529612201
 Transform:
   m_ObjectHideFlags: 0
@@ -543,9 +543,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad09fcb20eeab5547aea6654f3d81cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barrel_point: {fileID: 0}
   unlocked: 0
   weapon_damage: 10
   bullet_force: 10
   spread_radius: 0.04
+  spread_move_radius: 0
   bullet_amount: 1
   bullet_delay: 0
+  sound_radius: 0
+  sound: {fileID: 8300000, guid: 870b4bf73f7ac6840a3c87f1a84ee1c9, type: 3}
