@@ -7,7 +7,7 @@ public class Gate_Control : MonoBehaviour, Interactive
 {
     Animator ani;
     public bool is_open = true;
-    bool in_animation = false;
+    public bool in_animation = false;
     float open_pos_y;
     public float close_pos_y;
     Transform gate;
@@ -23,7 +23,7 @@ public class Gate_Control : MonoBehaviour, Interactive
     // Update is called once per frame
     void Update()
     {
-        if (in_animation && (is_open && gate.position.y >= close_pos_y) || (!is_open && gate.position.y <= open_pos_y)) {
+        if (in_animation && ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
             is_open = !is_open;
             in_animation = false;
         }

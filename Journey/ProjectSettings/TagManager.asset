@@ -10,6 +10,7 @@ TagManager:
   - Movable
   - Water
   - Launch Pad
+  - Interactable
   layers:
   - Default
   - TransparentFX
