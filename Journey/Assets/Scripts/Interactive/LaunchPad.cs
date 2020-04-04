@@ -21,7 +21,7 @@ public class LaunchPad : MonoBehaviour
      {
           if (other.tag == "Movable")
           {
-               other.GetComponent<Rigidbody>().AddForce(new Vector3(0, Object_Launch_Force, 0));
+               other.GetComponent<Rigidbody>().AddForce(Object_Launch_Force * transform.up);
           }
      }
 
