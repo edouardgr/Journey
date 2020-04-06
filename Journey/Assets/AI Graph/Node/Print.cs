@@ -1,24 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Print : Node
 {
-    string msg;
+    public T_String msg; 
 
     public Print()
     {
-        color = Color.blue;
+        type_count = GetType().GetProperties().Length;
+        size = new Vector2(size.x, 20 + (18 * type_count));
     }
 
     public override void Start()
     {
-        Debug.Log("Print: Start()");
+
     }
 
     public override bool Update()
     {
-        Debug.Log("Print: Update()");
+        Debug.Log(msg.value);
         return true;
+    }
+
+    public override void Draw()
+    {
+        msg.Draw();
     }
 }
