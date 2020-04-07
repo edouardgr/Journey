@@ -14,19 +14,23 @@ public class Weapon_Shooter : MonoBehaviour
     public Canvas hit_marker; //Hit marker of gun
     public RectTransform aim_reticle; //Aiming reticle of player
     public Arena_Master current_arena; //Get the current arena we are in
-    AudioSource audio_clip;
+    AudioSource audio_clip; //Play gun sounds
 
     //Bullet hole
+    [Header("Bullet holes")]
     public GameObject bullet_hole; //Prefab for bullet holes to be placed on objects
     public GameObject bullet_trail;
     List<GameObject> bullet_hole_list = new List<GameObject>(); //List of all the created bullet holes
     public int max_bullet_holes = 100; //Max number of bullet holes that can exist, prevents lagging from too many bullet holes
 
     //Move objects
+    [Header("Move Objects")]
     public float move_reach = 4f; //Max distance that we can interact with an object
     GameObject move_obj; //Reference to object that will be picked up
     public float throw_force = 10f; //Force that which we throw the held object
     bool is_holding = false;
+
+
 
     // Start is called before the first frame update
     void Awake()
@@ -42,6 +46,13 @@ public class Weapon_Shooter : MonoBehaviour
     void Update()
     {
         Physics.Raycast(ray_origin.position, ray_origin.forward, out normal_hit); //Shoot ray to check if object is in range
+
+        
+        if(move_obj == null && normal_hit.collider != null && normal_hit.collider.tag == "Interactable" && normal_hit.distance <= move_reach) {
+            if (normal_hit.collider.GetComponentInParent<Interactive>() != null && Input.GetKeyDown(KeyCode.E)) {
+                normal_hit.collider.GetComponentInParent<Interactive>().enable();
+            }
+        }
 
         //Recticle enlargens when moving, to indicate worse accuracy when moving
         if (aim_reticle) { //ASK BRAIN
