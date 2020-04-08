@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class target : MonoBehaviour, Shootable
 {
+     public GameObject[] my_interactive;
      public bool Value;
      public Material Activated;
      public Material Deactivated;
@@ -11,6 +12,11 @@ public class target : MonoBehaviour, Shootable
      {
           Value = !Value;
           Change_Color();
+
+          foreach (GameObject obj in my_interactive)
+          {
+               obj.GetComponent<Interactive>().enable();
+          }
      }
 
      public void Change_Color() {
