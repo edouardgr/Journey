@@ -162,13 +162,13 @@ public class AI_Director : EditorWindow
             }
 
             //Move the window offset around
-            if (move_state == 2 && Event.current.button == 2 && Event.current.type == EventType.MouseUp) {
+            if (move_state == 2 && Event.current.button == 0 && Event.current.type == EventType.MouseUp) {
                 mouse_origin = Vector2.zero;
                 window_origin = Vector2.zero;
                 move_state = 0;
             } else if (move_state == 2) {
                 window_offset = window_origin + (Event.current.mousePosition - mouse_origin);
-            } else if (move_state == 0 && Event.current.button == 2 && Event.current.type == EventType.MouseDown) {
+            } else if (current_index < 0 && select_index < 0 && move_state == 0 && Event.current.button == 0 && Event.current.type == EventType.MouseDown) {
                 move_state = 2;
                 mouse_origin = Event.current.mousePosition;
                 window_origin = window_offset;
