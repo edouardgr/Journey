@@ -453,3 +453,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Object_Launch_Force: 75
   Player_Launch_Force: 25
+  triggerSound: {fileID: 8300000, guid: 606e0755710ed784ea60e4779bb4e130, type: 3}
