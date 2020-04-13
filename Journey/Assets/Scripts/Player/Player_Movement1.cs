@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class Player_Movement1 : MonoBehaviour
 {
-
-     float speed = 12.0f;
-     float jump_speed = 9.0f;
-     float gravity = 25.0f;
-     public bool launch = false;
-
-     float swim_speed = 12f;
-     float swim_gravity = 3f;
-     bool is_in_water = false;
-
-     //Vertical and Horizontal movement
+     [Header("Movement")]
+     public float speed = 12.0f;
+     public float jump_speed = 9.0f;
+     public float gravity = 22.5f;
      public float acc_input_x = 0.2f, acc_input_z = 0.2f;
      public float curr_input_x = 0f, curr_input_z = 0f;
+     
+     
+     [Header("Swim")]
+     public float swim_speed = 12f;
+     public float swim_gravity = 3f;
 
+     bool is_in_water = false;
 
+     
+
+     [Header("Ignore for now")]
+     public bool launch = false;
      public Vector3 move_direction = Vector3.zero;
+
      Vector3 move_direction_water = Vector3.zero;
      CharacterController CC;
 
