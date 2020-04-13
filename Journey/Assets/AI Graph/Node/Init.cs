@@ -8,16 +8,16 @@ public class Init : Node
     {
         is_protected = true;
         has_input = null;
+        color = Color.red;
     }
 
     public override void Start()
     {
-        Debug.Log("Init: Start()");
+
     }
 
     public override bool Update()
     {
-        Debug.Log("Init: Update()");
         return true;
     }
 }

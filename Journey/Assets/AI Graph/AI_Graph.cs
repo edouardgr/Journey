@@ -12,7 +12,6 @@ public class AI_Graph : ScriptableObject
             if (nodes == null) {
                 nodes = new List<Node>();
             }
-
             return nodes;
         }
     }

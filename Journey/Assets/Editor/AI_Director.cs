@@ -16,7 +16,7 @@ public class AI_Director : EditorWindow
     int select_index; //User clicked it
     int current_index; //User hovering over it
     Connector select_connector;
-    Texture flow_connector;
+    Texture2D flow_connector;
     Connector connector;
 
     //ContextMenu
@@ -120,21 +120,24 @@ public class AI_Director : EditorWindow
                 }
 
                 //Set pre-connector to select connector
+                //Connector = end, select_connector = start
                 if (connector != null && select_connector == null) { //Create connection
                     select_connector = connector;
                     if (connector.dir == Direction.output) { //Check if we are leaving from the output
                         curr_node.next_node = null;
                     }
+                    Update_Connections();
                 } else if (connector == null && select_connector != null) { //Disable connection since nothing was clicked
                     select_connector = null;
-                } else if (connector != null && select_connector != null) { //Confirmed connection//ADD DIRECTIONAL INPUT CAN ONLY ACCEPT OUTPUT AND THE OTHER WAY (TAGS)
+                    Update_Connections();
+                } else if (connector != null && select_connector != null && select_connector.dataType == connector.dataType) { //Confirmed connection//ADD TAGS
                     if (select_connector.dir == Direction.output && connector.dir == Direction.input) {
                         graph.nodes[select_index].next_node = graph.nodes[graph.nodes.IndexOf(curr_node)];
                     } else if(select_connector.dir == Direction.input && connector.dir == Direction.output) {
                         curr_node.next_node = graph.nodes[select_index];
                     }
                     select_connector = null;
-
+                    Update_Connections();
                 }
 
                 //Set pre-select to select
@@ -159,13 +162,13 @@ public class AI_Director : EditorWindow
             }
 
             //Move the window offset around
-            if (move_state == 2 && Event.current.button == 2 && Event.current.type == EventType.MouseUp) {
+            if (move_state == 2 && Event.current.button == 0 && Event.current.type == EventType.MouseUp) {
                 mouse_origin = Vector2.zero;
                 window_origin = Vector2.zero;
                 move_state = 0;
             } else if (move_state == 2) {
                 window_offset = window_origin + (Event.current.mousePosition - mouse_origin);
-            } else if (move_state == 0 && Event.current.button == 2 && Event.current.type == EventType.MouseDown) {
+            } else if (current_index < 0 && select_index < 0 && move_state == 0 && Event.current.button == 0 && Event.current.type == EventType.MouseDown) {
                 move_state = 2;
                 mouse_origin = Event.current.mousePosition;
                 window_origin = window_offset;
@@ -211,26 +214,18 @@ public class AI_Director : EditorWindow
                 Handles.DrawLine(select_connector.rect.position + graph.nodes[select_index].position + window_offset, mouse);
             }
 
-            //Draw panels
             for (int i = 0; i < graph.nodes.Count; i++) {
-                if (graph.nodes[i].has_input != null) { graph.nodes[i].has_input.active = false; }
-                if (graph.nodes[i].has_output != null) { graph.nodes[i].has_output.active = false; }
-            }
-
-            for (int i = 0; i < graph.nodes.Count; i++) {
-                if(graph.nodes[i].has_output != null) { graph.nodes[i].has_output.active = (graph.nodes[i].next_node != null /*|| (select_connector != null && select_index == i)*/); }
-                if(graph.nodes[i].next_node != null) { graph.nodes[i].next_node.has_input.active = true; }
                 EditorUtility.SetDirty(graph.nodes[i]);
 
                 if (i != select_index) {
-                    DrawPanel(graph.nodes[i], window_offset);
+                    DrawPanel(graph.nodes[i], window_offset, false);
                 }
             }
             
             //Draw outline and focused
             if (select_index >= 0 && select_index < graph.nodes.Count) {
                 EditorGUI.DrawRect(new Rect(graph.nodes[select_index].position.x + window_offset.x - 2, graph.nodes[select_index].position.y + window_offset.y - 2, graph.nodes[select_index].size.x + 4, graph.nodes[select_index].size.y + 4), Color.blue); //Draw Selected panel rect
-                DrawPanel(graph.nodes[select_index], window_offset);
+                DrawPanel(graph.nodes[select_index], window_offset, true);
             }
 
             //Draw pre-select for connectors
@@ -259,14 +254,13 @@ public class AI_Director : EditorWindow
                     EditorGUILayout.LabelField(node_type_list[i]);
                     GUILayout.EndArea();
                 }
-
             }
         }
 
         //Graph input field
         GUILayout.BeginArea(new Rect(Vector2.zero, new Vector2(200, 20)));
         //GUILayout.BeginHorizontal();
-        graph = (AI_Graph)EditorGUILayout.ObjectField(graph, typeof(AI_Graph));
+        graph = (AI_Graph)EditorGUILayout.ObjectField(graph, typeof(AI_Graph), true);
         //if(graph != null && GUILayout.Button("Save")) {
 
         //}
@@ -275,6 +269,22 @@ public class AI_Director : EditorWindow
         
         Repaint(); //Repaint boio*/
     } 
+
+    void Update_Connections()
+    {
+        if (graph == null) { return; } 
+        for (int i = 0; i < graph.nodes.Count; i++) {
+            if (graph.nodes[i].has_output != null) { graph.nodes[i].has_output.active = false; }
+            if (graph.nodes[i].has_input != null) { graph.nodes[i].has_input.active = false; }
+        }
+
+        for (int i = 0; i < graph.nodes.Count; i++) {
+            if(graph.nodes[i].next_node != null) {
+                graph.nodes[i].has_output.active = true;
+                graph.nodes[i].next_node.has_input.active = true;
+            }
+        }
+    }
 
     void Start()
     {
@@ -293,16 +303,17 @@ public class AI_Director : EditorWindow
             }
         }
         window_offset = Vector2.zero;
+        Update_Connections();
     }
 
-    void DrawPanel(Node node, Vector2 offset)
+    void DrawPanel(Node node, Vector2 offset, bool selected)
     {
         Rect _window = new Rect(node.position.x + offset.x, node.position.y + offset.y, node.size.x, node.size.y);
         Rect _header = new Rect(node.position.x + offset.x, node.position.y + offset.y, node.size.x, 20);
         
         //Draw Connectors
         if(node.next_node != null && node.next_node.has_input != null) {
-            Handles.DrawLine(node.has_output.rect.position + _window.position, node.next_node.has_input.rect.position + node.next_node.position + offset);
+            Handles.DrawLine(node.has_output.rect.center + _window.position, node.next_node.has_input.rect.center + node.next_node.position + offset);
         }
 
         EditorGUI.DrawRect(new Rect(_window.position - new Vector2(1, 1), _window.size + new Vector2(2, 2)), new Color(0.2f, 0.2f, 0.2f, 1f));
@@ -321,5 +332,12 @@ public class AI_Director : EditorWindow
             node.has_output.Draw(flow_connector);
         }
         GUILayout.EndArea();
+
+        Rect _win = new Rect(_window.position + new Vector2(1, 40), _window.size - new Vector2(1, 40));
+        GUILayout.BeginArea(_win);
+        //Draw Data Types attached
+        node.Draw();
+        GUILayout.EndArea();
+
     }
 }

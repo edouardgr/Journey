@@ -7,7 +7,7 @@ using UnityEngine;
 public class Wrath_Bar_Behav : MonoBehaviour
 {
     Image firstBar, secondBar, thirdBar;
-    int wrath_level = 1;
+    //int wrath_level = 1;
     [Range(0, 1)]
     public float progress_value = 0.0f;
 

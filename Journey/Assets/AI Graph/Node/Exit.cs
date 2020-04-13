@@ -8,16 +8,16 @@ public class Exit : Node
     {
         is_protected = true;
         has_output = null;
+        color = Color.red;
     }
 
     public override void Start()
     {
-        Debug.Log("Exit: Start()");
+
     }
 
     public override bool Update()
     {
-        Debug.Log("Exit: Update()");
         return true;
     }
 }
