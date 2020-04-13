@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LaunchPad : MonoBehaviour
 {
+
       public float Object_Launch_Force = 75f;
       public float Player_Launch_Force = 25f;
 	  AudioSource audioSource;
@@ -13,6 +14,7 @@ public class LaunchPad : MonoBehaviour
      private void OnTriggerEnter(Collider other)
      {
           audioSource.Play();
+
           if (other.tag == "Player") {
 
                other.GetComponent<Player_Movement1>().move_direction.y = Player_Launch_Force;
@@ -25,7 +27,7 @@ public class LaunchPad : MonoBehaviour
      {
           if (other.tag == "Movable")
           {
-               other.GetComponent<Rigidbody>().AddForce(new Vector3(0, Object_Launch_Force, 0));
+               other.GetComponent<Rigidbody>().AddForce(Object_Launch_Force * transform.up);
           }
      }
 
