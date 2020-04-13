@@ -68,10 +68,11 @@ public class Weapon_Shooter : MonoBehaviour
                     ani.Play("Fire", 0); //Play firing animation for the equiped weapon
                 }
                 //Sound stuff
-                if (manager.info.sound != null){
-                    audio_clip.clip = manager.info.sound;
-                    audio_clip.Play();
-                }
+                audio_clip.Play();
+                //if (manager.info.sound != null){
+                //    audio_clip.clip = manager.info.sound;
+                //    audio_clip.Play();
+                //}
                 bool hit_confirmed = false;
                 for (int i = 0; i < manager.info.bullet_amount; i++) { //Loop for each bullet that will be fired
                     Vector2 randxy = Random.insideUnitCircle * (manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)))); //Random point inside the spread radius
