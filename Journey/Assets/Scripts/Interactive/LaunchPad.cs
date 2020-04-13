@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class LaunchPad : MonoBehaviour
 {
-      public float Object_Launch_Force = 75f;
-      public float Player_Launch_Force = 25f;
-    
+     public float Object_Launch_Force = 75f;    
+     public float Player_Launch_Force = 25f;
+
      private void OnTriggerEnter(Collider other)
      {
-          
+
           if (other.tag == "Player") {
 
                other.GetComponent<Player_Movement1>().move_direction.y = Player_Launch_Force;
                other.GetComponent<Player_Movement1>().launch = true;
           }
+          
      }
 
      private void OnTriggerStay(Collider other)
