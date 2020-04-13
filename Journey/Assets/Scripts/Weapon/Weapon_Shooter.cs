@@ -68,7 +68,6 @@ public class Weapon_Shooter : MonoBehaviour
                     ani.Play("Fire", 0); //Play firing animation for the equiped weapon
                 }
                 //Sound stuff
-                audio_clip.Play();
                 if (manager.info.sound != null){
                     audio_clip.clip = manager.info.sound;
                     audio_clip.Play();
