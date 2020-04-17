@@ -574,6 +574,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 411216667}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &568197533 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5474731150052543086, guid: 182e8946213fd4964ac1bf523ed5e653,
+    type: 3}
+  m_PrefabInstance: {fileID: 940143128}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &645490480
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,17 +2577,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4154143655295805352, guid: a2c07967052a7214f9c7c40409644936,
+        type: 3}
+      propertyPath: m_Name
+      value: Teleport Zone (Put player on me)
+      objectReference: {fileID: 0}
     - target: {fileID: 4154143655295805357, guid: a2c07967052a7214f9c7c40409644936,
         type: 3}
       propertyPath: thePlayer
       value: 
-      objectReference: {fileID: 5474731150052543086, guid: 182e8946213fd4964ac1bf523ed5e653,
+      objectReference: {fileID: 568197533}
+    - target: {fileID: 4154143655415984564, guid: a2c07967052a7214f9c7c40409644936,
         type: 3}
+      propertyPath: m_Name
+      value: Teleport Zone (Put player on me)
+      objectReference: {fileID: 0}
     - target: {fileID: 4154143655415984569, guid: a2c07967052a7214f9c7c40409644936,
         type: 3}
       propertyPath: thePlayer
       value: 
-      objectReference: {fileID: 5474731150052543086, guid: 182e8946213fd4964ac1bf523ed5e653,
-        type: 3}
+      objectReference: {fileID: 568197533}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2c07967052a7214f9c7c40409644936, type: 3}
