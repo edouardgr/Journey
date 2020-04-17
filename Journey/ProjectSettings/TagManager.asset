@@ -11,6 +11,7 @@ TagManager:
   - Water
   - Launch Pad
   - Interactable
+  - Death
   layers:
   - Default
   - TransparentFX
