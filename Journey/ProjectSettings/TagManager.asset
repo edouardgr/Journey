@@ -11,6 +11,7 @@ TagManager:
   - Water
   - Launch Pad
   - Interactable
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
