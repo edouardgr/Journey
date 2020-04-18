@@ -12,6 +12,7 @@ TagManager:
   - Launch Pad
   - Interactable
   - Death
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

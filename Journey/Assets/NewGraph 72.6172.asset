@@ -85,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   is_protected: 0
   type_count: 2
-  position: {x: 290, y: 186}
+  position: {x: 91, y: 63}
   size: {x: 100, y: 56}
   color: {r: 0, g: 0, b: 1, a: 1}
   next_node: {fileID: 0}
