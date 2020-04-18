@@ -136,8 +136,16 @@ public class Player_Movement1 : MonoBehaviour
                is_in_water = true;
 
      }
-     //When user jumps out of some water
-     private void OnTriggerExit(Collider other)
+     private void OnTriggerEnter(Collider other)
+     {
+        if (other.tag == "Death") {
+            print("Dead");
+        }
+            
+
+     }
+    //When user jumps out of some water
+    private void OnTriggerExit(Collider other)
      {
           if (other.tag == "Water") {
                is_in_water = false;
