@@ -5,17 +5,19 @@ using UnityEngine;
 public class Checkpoint_master : MonoBehaviour
 {
     public Transform current_checkpoint;
-    int index = 0;
+    public Transform respawn_point;
+    int index = -1;
 
     private void Start()
     {
-        current_checkpoint = transform.GetChild(index);
+        update_checkpoint();
     }
     
     public void update_checkpoint()
     {
         index++;
-        current_checkpoint.GetChild(1).gameObject.SetActive(false);
         current_checkpoint = transform.GetChild(index);
+        current_checkpoint.GetChild(1).gameObject.SetActive(false);
+        respawn_point = current_checkpoint.GetChild(0);
     }
 }

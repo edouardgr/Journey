@@ -18,6 +18,6 @@ public class CheckpointEditor : Editor
             gameObj.name = "Checkpoint " + obj.transform.childCount;
         }
 
-        serializedObject.Update();
+        DrawDefaultInspector();
     }
 }

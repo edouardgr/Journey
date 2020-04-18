@@ -138,9 +138,14 @@ public class Player_Movement1 : MonoBehaviour
      }
      private void OnTriggerEnter(Collider other)
      {
-        if (other.tag == "Death") {
-            print("Dead");
+        if(other.tag == "CheckPoint")
+        { //GROSS
+            GameObject.FindGameObjectWithTag("CheckPoint").transform.root.GetComponent<Checkpoint_master>().update_checkpoint();
         }
+
+        if (other.tag == "Death") {
+            transform.position = GameObject.FindGameObjectWithTag("CheckPoint").transform.root.GetComponent<Checkpoint_master>().respawn_point.position;
+        } //TOO LONG
             
 
      }
