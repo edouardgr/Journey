@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class Wrath_Bar_Behav : MonoBehaviour
 {
-    Image firstBar, secondBar, thirdBar;
-    //int wrath_level = 1;
+    Image firstBar, secondBar, thirdBar;    
     [Range(0, 1)]
     public float progress_value = 0.0f;
 
@@ -22,7 +20,7 @@ public class Wrath_Bar_Behav : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        progress_value = (Mathf.Cos(Time.time) + 1) / 2;
+        //Displays the amount of progress
         firstBar.fillAmount = (progress_value / 0.2f); //First 
         secondBar.fillAmount = ((progress_value - 0.2f) / 0.1f); //Second
         thirdBar.fillAmount = ((progress_value - 0.3f) / 0.7f); //Third

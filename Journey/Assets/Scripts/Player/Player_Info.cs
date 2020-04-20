@@ -32,9 +32,9 @@ public class Player_Info : MonoBehaviour, Shootable
             Damage(Random.Range(1, 99), null);
         }
 
-        main_health_bar.fillAmount = ((float)current_health / max_health); //Fill the bar with the amount of health left
+        main_health_bar.fillAmount = (float)current_health / max_health; //Fill the bar with the amount of health left
         sub_health = Mathf.Lerp(sub_health, current_health, Time.deltaTime * 2); //Calculate the current value of the sub health bar
-        sub_health_bar.fillAmount = (sub_health / max_health); //Display the chasing effect of the sub health bar
+        sub_health_bar.fillAmount = sub_health / max_health; //Display the chasing effect of the sub health bar
         health_display.text = current_health.ToString(); //Set the display value
     }
 

@@ -20,16 +20,6 @@ public class Gate_Control : MonoBehaviour, Interactive
         ani = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (in_animation && ani.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-            is_open = !is_open;
-            in_animation = false;
-        }
-    }
-
-
     private void LateUpdate()
     {
         if (!in_animation) {
@@ -41,14 +31,14 @@ public class Gate_Control : MonoBehaviour, Interactive
     {
         if (in_animation || is_open) { return; }
         ani.Play("Open_Gate");
-        in_animation = true;
+        is_open = true;
     }
 
     public void Close_Gate()
     {
         if (in_animation || !is_open) { return; }
         ani.Play("Close_Gate");
-        in_animation = true;
+        is_open = false;
     }
 
     public void Toggle()
