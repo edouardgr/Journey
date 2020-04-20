@@ -8,7 +8,7 @@ public class Weapon_Shooter : MonoBehaviour
 {
     Weapon_Manager manager; //Player weapon manager
     Animator manager_ani; //Gun pivot animator
-    Player_Movement movement; //Player movement
+    Player_Movement1 movement; //Player movement
     RaycastHit spread_hit, normal_hit; 
     Transform ray_origin;
     public Canvas hit_marker; //Hit marker of gun
@@ -36,7 +36,7 @@ public class Weapon_Shooter : MonoBehaviour
     void Awake()
     {
         manager = GetComponent<Weapon_Manager>(); //Reference to player weapon manager
-        movement = GetComponent<Player_Movement>(); //Reference to player movement
+        movement = GetComponent<Player_Movement1>(); //Reference to player movement
         ray_origin = transform.GetChild(0).transform; //Get the aiming point of fps
         manager_ani = manager.gun_pivot.GetComponent<Animator>();
         audio_clip = GetComponent<AudioSource>(); //sound stuff
