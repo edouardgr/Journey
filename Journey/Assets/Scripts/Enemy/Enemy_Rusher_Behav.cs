@@ -54,7 +54,6 @@ public class Enemy_Rusher_Behav : Enemy_Arena
             if(att_time <= 0) {
                 if(Vector3.Distance(transform.position, target.position) <= stopping_distance && Within_angle(transform, target, info)) { //Check if target is still in range
                     target.GetComponent<Shootable>().Damage(info.projectile_damage, gameObject); //CHANGE PROJECTILE_DAMAGE to CQC_DAMAGE
-                    Debug.Log("Big yikes");
                 }
                 state = Enemy_state.chase;
             }

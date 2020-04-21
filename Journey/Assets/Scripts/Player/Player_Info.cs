@@ -14,7 +14,7 @@ public class Player_Info : MonoBehaviour, Shootable
 
     public int max_health = 100; //Players health
     float sub_health; //Sub health bar effect
-    int current_health; //Contains the actual health of the player
+    public int current_health; //Contains the actual health of the player
 
     private void Start()
     {

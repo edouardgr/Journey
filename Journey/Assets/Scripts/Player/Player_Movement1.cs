@@ -144,7 +144,7 @@ public class Player_Movement1 : MonoBehaviour
         }
 
         if (other.tag == "Death") {
-            transform.position = GameObject.FindGameObjectWithTag("CheckPoint").transform.root.GetComponent<Checkpoint_master>().respawn_point.position;
+            Respawn();
         } //TOO LONG
             
 
@@ -164,5 +164,10 @@ public class Player_Movement1 : MonoBehaviour
           }
         
      }
+
+    void Respawn() {
+        transform.position = GameObject.FindGameObjectWithTag("CheckPoint").transform.root.GetComponent<Checkpoint_master>().respawn_point.position;
+        GetComponent<Player_Info>().current_health = GetComponent<Player_Info>().max_health;
+    }
 }
 
