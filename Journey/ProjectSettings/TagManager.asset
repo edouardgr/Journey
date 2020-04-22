@@ -14,6 +14,7 @@ TagManager:
   - Death
   - CheckPoint
   - Non-Shootable
+  - Replace
   layers:
   - Default
   - TransparentFX
