@@ -29,7 +29,7 @@ public class Weapon_Shooter : MonoBehaviour
     GameObject move_obj; //Reference to object that will be picked up
     public float throw_force = 10f; //Force that which we throw the held object
     bool is_holding = false;
-
+    public bool perfect_aim;
 
 
     // Start is called before the first frame update
@@ -75,6 +75,7 @@ public class Weapon_Shooter : MonoBehaviour
                 bool hit_confirmed = false;
                 for (int i = 0; i < manager.info.bullet_amount; i++) { //Loop for each bullet that will be fired
                     Vector2 randxy = Random.insideUnitCircle * (manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z)))); //Random point inside the spread radius
+                    if(perfect_aim) { randxy = Vector2.zero; }
                     Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(randxy.x, randxy.y, 0), out spread_hit); //Shoot random point from the player, spread gets larger the further from the object, also the spread increases when moving
                     if (spread_hit.collider != null && spread_hit.collider.tag != "Player") { //Check if ray has hit anything
                         create_bullet_holes(spread_hit); //Create bullet hole at the position of ray intersect
