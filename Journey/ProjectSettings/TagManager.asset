@@ -13,6 +13,7 @@ TagManager:
   - Interactable
   - Death
   - CheckPoint
+  - Non-Shootable
   layers:
   - Default
   - TransparentFX

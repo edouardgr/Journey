@@ -83,7 +83,7 @@ public class Weapon_Shooter : MonoBehaviour
                             hit_confirmed = true;
                         }
 
-                        if (spread_hit.collider.GetComponent<Rigidbody>() != null) { //Check if object has a rigidbody
+                        if (spread_hit.collider.GetComponent<Rigidbody>() != null && spread_hit.collider.tag != "Non-Shootable") { //Check if object has a rigidbody
                             spread_hit.collider.GetComponent<Rigidbody>().AddForceAtPosition(ray_origin.forward * manager.info.bullet_force, spread_hit.point, ForceMode.Impulse); //Add an impulse to the point of contact on the object
                             if (hit_marker) { spread_hit.collider.gameObject.AddComponent<Throwable_Obj>().hit_marker = hit_marker; } //Flying objects will do damage
                             Debug.DrawLine(spread_hit.point, spread_hit.point - (ray_origin.forward * manager.info.bullet_force), Color.red, 10f); //Visual indicator of bullet impact and force applied
