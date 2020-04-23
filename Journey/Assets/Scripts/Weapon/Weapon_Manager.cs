@@ -6,7 +6,7 @@ public class Weapon_Manager : MonoBehaviour
 {
     public GameObject gun_pivot; //Gun_Pivot has all the guns as its children
     public int curr_index = -1; //Enables the selected weapon
-    int max_index; //Highest value the index can go to
+    public int max_index; //Highest value the index can go to
     public Weapon_Info info = null;
     //float switch_delay = 0.5f; //Delay between switching guns, prevents quick spamming //FUTURE IDEA
     bool weapons_enabled = true;
