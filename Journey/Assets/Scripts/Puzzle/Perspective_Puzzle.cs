@@ -25,7 +25,7 @@ public class Perspective_Puzzle : MonoBehaviour
         //Reveal completed puzzle
         if(start_fade) {
             //Tinker with this maybe
-            Camera.main.transform.root.position = Vector3.Lerp(Camera.main.transform.root.position, puzzle_spot.position, Time.deltaTime * 5);
+            Camera.main.transform.root.position = /*Vector3.Lerp(Camera.main.transform.root.position,*/ puzzle_spot.position;//, Time.deltaTime * 5);
             time -= Time.deltaTime;
 
             MeshRenderer[] meshes = complete.GetComponentsInChildren<MeshRenderer>();
@@ -40,7 +40,7 @@ public class Perspective_Puzzle : MonoBehaviour
 
             if (time <= 0) {
                 puzzle.SetActive(false);
-                Camera.main.transform.root.GetComponent<Player_Movement>().is_enabled = true;
+                Camera.main.transform.root.GetComponent<Player_Movement1>().is_enabled = true;
                 enabled = false; //Disable the script as it is
             }
             return;
@@ -60,7 +60,7 @@ public class Perspective_Puzzle : MonoBehaviour
             }
         }
         if(match) {
-            Camera.main.transform.root.GetComponent<Player_Movement>().is_enabled = false;
+            Camera.main.transform.root.GetComponent<Player_Movement1>().is_enabled = false;
             start_fade = true;
             time = fade_time;
             //Disable shadows from appearing
