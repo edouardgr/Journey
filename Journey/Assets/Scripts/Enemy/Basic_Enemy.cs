@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-/*Edouard*/
+/*Edouard and Brian : )*/
+
 public class Basic_Enemy : MonoBehaviour, Shootable
 {
+    public float wrath_bar_percent = 0.20f;
     public GameObject enemy; //Enemy to spawn
     Enemy_Info info; //Info related to the spawned enemy
     public float detection_radius = 10f; //Player enters radius, enemy becomes active
     public Transform target = null; //Object that the enemy will chase
     public GameObject projectile; //Projectile object enemy will shoot at target
     float timer = 0; //Timer for projectile firing delay
-
+    public float Wrath_To_Add = 0.2f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -67,7 +69,8 @@ public class Basic_Enemy : MonoBehaviour, Shootable
     {
         info.health -= amount; //Deplete enemy health
         if(info.health <= 0) { //Check if enemy health is below 0
-            Destroy(gameObject); //Remove enemy from the game
+               Wrath_Bar.Add_Wrath_Bar(Wrath_To_Add);
+               Destroy(gameObject); //Remove enemy from the game            
         }
         if(!target && sender) { //Check if enemy is not currently chasing a target
             timer = info.projectile_fire_rate; //Initilize timer
