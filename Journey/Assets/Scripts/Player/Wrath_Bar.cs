@@ -5,7 +5,7 @@ using UnityEngine;
 //static class for the wrath bar, so that any class can call and add to it, as well as read the value.
 public static class Wrath_Bar 
 {
-     public static bool Can_Be_Modified = true;
+     public static bool Can_Be_Modified = true; //boolean to check to see if value can be modified.
 
      static float Wrath_Bar_Meter = 0.0f; 
      public static float Get_Wrath_Bar() 
