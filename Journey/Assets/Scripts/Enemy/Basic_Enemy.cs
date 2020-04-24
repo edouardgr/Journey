@@ -69,7 +69,9 @@ public class Basic_Enemy : MonoBehaviour, Shootable
     {
         info.health -= amount; //Deplete enemy health
         if(info.health <= 0) { //Check if enemy health is below 0
-               Wrath_Bar.Add_Wrath_Bar(Wrath_To_Add);
+               if(Wrath_Bar.Can_Be_Modified)
+                    Wrath_Bar.Add_Wrath_Bar(Wrath_To_Add);
+
                Destroy(gameObject); //Remove enemy from the game            
         }
         if(!target && sender) { //Check if enemy is not currently chasing a target
