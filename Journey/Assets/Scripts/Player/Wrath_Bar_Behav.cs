@@ -43,7 +43,7 @@ public class Wrath_Bar_Behav : MonoBehaviour
 
           if (progress_value >= 1 && !InWrath) //If they hit wrath bar 100%, apply a random (good) modifier.
           {
-               pick_effect = rand.Next(3, 3);
+               pick_effect = rand.Next(1, 3);
                InWrath = true;
                Wrath_Bar.Can_Be_Modified = false; //Make sure nothing can add to the wrath bar.
 
