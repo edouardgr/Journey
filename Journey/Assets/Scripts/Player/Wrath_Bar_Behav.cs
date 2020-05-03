@@ -39,11 +39,12 @@ public class Wrath_Bar_Behav : MonoBehaviour
          
           Weapon_Manager The_Manager = Player.GetComponent<Weapon_Manager>();
 
-          if (progress_value >= 1 && !InWrath) //If they hit wrath bar 100%, apply a random (good) modifier.
+          if (Wrath_Bar.Get_Wrath_Bar() >= 1 && (InWrath == false)) //If they hit wrath bar 100%, apply a random (good) modifier.
           {
-               pick_effect = rand.Next(1, 3);
+
+               pick_effect = rand.Next(1, 4); //random number between 1 and 3 inclusive.               
                InWrath = true;
-               Wrath_Bar.Can_Be_Modified = false; //Make sure nothing can add to the wrath bar.
+               Wrath_Bar.Can_Be_Modified = false; //Make sure nothings can add to the wrath bar after its already started.
                Player.GetComponent<AudiioQueue>().queue.Add(sound);
                //pick a random effect
                switch (pick_effect)
@@ -63,14 +64,16 @@ public class Wrath_Bar_Behav : MonoBehaviour
           {
                //If current time less then time we want to run till, add to time and update the wrath bar.
                if (time < run_time)
-               {
+               {                   
                     time += Time.deltaTime;
                     Wrath_Bar.Set_Wrath_Bar((run_time - time) / run_time);
                }
                else
                {
+                    time = 0; //reset the time to 0, for progress bar.
                     InWrath = false;
-                    Wrath_Bar.Can_Be_Modified = true; //Make we can re add to the wrath bar.
+                    Wrath_Bar.Can_Be_Modified = true; //Make so killing enemies re adds to the wrath bar.
+                    Wrath_Bar.Set_Wrath_Bar(0); //reset the bar back to 0 so that when you kill enemies it adds back up evenly.
                     switch (pick_effect)
                     {
                          case 1:
