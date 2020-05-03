@@ -42,8 +42,8 @@ public class Arena_Master : MonoBehaviour
                 current_enemies.Add(enemy.GetComponent<Enemy_Arena>());
                 enemy_tickets--;
             }
-        } 
-        
+        }
+
         if (enemy_tickets <= 0 && current_enemies.Count <= 0) {
             Toggle_Gates(false);
         }
@@ -89,7 +89,7 @@ public class Arena_Master : MonoBehaviour
 
     public bool RandomPoint(out Vector3 result) //Shorter version of the RandomPoint Function
     {
-        return RandomPoint(arena_center.position, arena_distance, out result);
+        return RandomPoint(arena_center.position + Vector3.up * 20f, arena_distance, out result);
     }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result) //From unity website

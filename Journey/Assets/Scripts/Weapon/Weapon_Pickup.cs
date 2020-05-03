@@ -42,6 +42,7 @@ public class Weapon_Pickup : MonoBehaviour
             if (!info.unlocked) { //Check if weapon has been unlocked yet, prevents weapon switching when already obtained
                 info.unlocked = true; //Enable the currently picked up weapon
                 other.GetComponent<Weapon_Manager>().switch_weapon(weapon_index); //Switch to the pick up weapon
+                other.GetComponent<Weapon_Manager>().PlayPickupSound();
             }
             Destroy(gameObject); //Destroy this object to free up memory
         }

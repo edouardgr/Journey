@@ -17,6 +17,7 @@ public abstract class Enemy_Arena : MonoBehaviour, Shootable
     public float alert_when_shot = 40f;
     public float alert_chase_radius = 10f;
     public Transform target;
+    public float Wrath_To_Add = 0.2f;
 
     public float spawn_time = 1f; //Time it takes to spawn and despawn
     [HideInInspector]
@@ -44,7 +45,7 @@ public abstract class Enemy_Arena : MonoBehaviour, Shootable
             time += Time.deltaTime * time_dir;
             if (time_dir < 0 && time < 0) { time_dir = 0; time = 0; } //Count down
             if (time_dir > 0 && time > spawn_time) { time_dir = 0; time = spawn_time; } //Count up
-            mr.material.SetFloat("Vector1_2FBF5B54", (time / spawn_time));
+           // mr.material.SetFloat("Vector1_2FBF5B54", (time / spawn_time));
         }
     }
 
@@ -64,6 +65,8 @@ public abstract class Enemy_Arena : MonoBehaviour, Shootable
         }
 
         if (info.health <= 0) { //Health depleted & despawn
+            if (Wrath_Bar.Can_Be_Modified)
+                Wrath_Bar.Add_Wrath_Bar(Wrath_To_Add);
             DeSpawn(); //Start despawn
             agent.isStopped = true;
             master.despawn_list.Add(this);

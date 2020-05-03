@@ -14,10 +14,8 @@ public class Wrath_Bar_Behav : MonoBehaviour
      //time stuff
      float time = 0f;
      public float run_time = 10f;
+     public AudioClip sound;
      
-
-
-
      // Start is called before the first frame update
      void Start()
      {
@@ -46,7 +44,7 @@ public class Wrath_Bar_Behav : MonoBehaviour
                pick_effect = rand.Next(1, 3);
                InWrath = true;
                Wrath_Bar.Can_Be_Modified = false; //Make sure nothing can add to the wrath bar.
-
+               Player.GetComponent<AudiioQueue>().queue.Add(sound);
                //pick a random effect
                switch (pick_effect)
                {

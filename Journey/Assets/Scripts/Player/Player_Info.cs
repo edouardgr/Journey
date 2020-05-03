@@ -15,6 +15,8 @@ public class Player_Info : MonoBehaviour, Shootable
     public int max_health = 100; //Players health
     float sub_health; //Sub health bar effect
     public int current_health; //Contains the actual health of the player
+    public AudioSource audio_source;
+    public AudioClip hurt, death;
 
     private void Start()
     {
@@ -38,9 +40,24 @@ public class Player_Info : MonoBehaviour, Shootable
         health_display.text = current_health.ToString(); //Set the display value
     }
 
+    public void PlayDeathSound() {
+        if(audio_source.isPlaying) { return; }
+        audio_source.clip = death;
+        audio_source.Play();
+    }
+
     public void Damage(int amount, GameObject sender)
     {
         current_health -= amount; //Subtract recieved health
         current_health = Mathf.Clamp(current_health, 0, max_health); //Clamp the health so the value can't go above max_health or below 0
+        if (current_health <= 0) { GetComponent<Player_Movement1>().Respawn(); }
+        if (audio_source.isPlaying) { return; }
+        audio_source.clip = hurt;
+        audio_source.Play();
+    }
+    
+    public void AddHealth(int health) {
+        current_health += health;
+        current_health = Mathf.Clamp(current_health, 0, max_health);
     }
 }
