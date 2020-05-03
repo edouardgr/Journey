@@ -27,10 +27,10 @@ public class HealthPickup : MonoBehaviour
 
     private void OnDrawGizmos() //Used for visual reference
     {
-        Handles.color = Color.green;
-        Handles.DrawWireDisc(transform.position, Vector3.up, GetComponent<SphereCollider>().radius); //up
-        Handles.DrawWireDisc(transform.position, Vector3.right, GetComponent<SphereCollider>().radius); //right
-        Handles.DrawWireDisc(transform.position, Vector3.forward, GetComponent<SphereCollider>().radius); //forward
+        //Handles.color = Color.green;
+        //Handles.DrawWireDisc(transform.position, Vector3.up, GetComponent<SphereCollider>().radius); //up
+        //Handles.DrawWireDisc(transform.position, Vector3.right, GetComponent<SphereCollider>().radius); //right
+        //Handles.DrawWireDisc(transform.position, Vector3.forward, GetComponent<SphereCollider>().radius); //forward
     }
 
     private void OnTriggerEnter(Collider other) //When the player touches weapon
