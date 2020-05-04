@@ -82,10 +82,10 @@ public class Enemy_Rusher_Behav : Enemy_Arena
             //Draw Destination
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(agent.destination, 1f); //Draw Destination
-            Handles.color = Color.blue;
-            Handles.DrawWireDisc(agent.destination, Vector3.up, stopping_distance); //Draw stopping radius
-            Handles.color = Color.red;
-            Handles.DrawWireDisc(transform.position, transform.up, attack_radius);
+            //Handles.color = Color.blue;
+            //Handles.DrawWireDisc(agent.destination, Vector3.up, stopping_distance); //Draw stopping radius
+            //Handles.color = Color.red;
+            //Handles.DrawWireDisc(transform.position, transform.up, attack_radius);
         }
     }
 

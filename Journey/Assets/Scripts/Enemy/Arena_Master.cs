@@ -61,8 +61,8 @@ public class Arena_Master : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Handles.color = Color.blue;
-        Handles.DrawWireDisc(arena_center.position, arena_center.up, arena_distance);
+        //Handles.color = Color.blue;
+        //Handles.DrawWireDisc(arena_center.position, arena_center.up, arena_distance);
     }
 
     public void Alert_nearby_enemies(Transform origin_point, float radius, Transform target)

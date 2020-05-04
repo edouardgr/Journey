@@ -59,8 +59,8 @@ public class Basic_Enemy : MonoBehaviour, Shootable
 
     private void OnDrawGizmos()
     {
-        Handles.color = Color.blue;
-        Handles.DrawWireDisc(transform.position, transform.up, detection_radius); //Detection radius
+        //Handles.color = Color.blue;
+        //Handles.DrawWireDisc(transform.position, transform.up, detection_radius); //Detection radius
         if(target) {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, target.position); //Line to show who the enemy is chasing

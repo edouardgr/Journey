@@ -130,17 +130,17 @@ public class Weapon_Shooter : MonoBehaviour
             Gizmos.DrawSphere(normal_hit.point, 0.1f); //Draw world space intersection point
 
             if(normal_hit.collider != null && manager.unlocked_count() > 0) { //Check if we hit an object
-                Handles.color = Color.green;
+                //Handles.color = Color.green;
                 RaycastHit temp;
                 //Show spread radius 
                 Physics.Raycast(ray_origin.position, ray_origin.forward + new Vector3(0, manager.info.spread_radius + (manager.info.spread_move_radius * Mathf.Max(Mathf.Abs(movement.curr_input_x), Mathf.Abs(movement.curr_input_z))), 0), out temp);
-                Handles.DrawWireDisc(normal_hit.point, normal_hit.normal, temp.point.y - normal_hit.point.y);
+                //Handles.DrawWireDisc(normal_hit.point, normal_hit.normal, temp.point.y - normal_hit.point.y);
             }
         }
 
         if(manager && manager.info) {
-            Handles.color = Color.yellow;
-            Handles.DrawWireDisc(transform.position, transform.up, manager.info.sound_radius);
+            //Handles.color = Color.yellow;
+            //Handles.DrawWireDisc(transform.position, transform.up, manager.info.sound_radius);
         }
     }
 

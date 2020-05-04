@@ -115,8 +115,8 @@ public abstract class Enemy_Arena : MonoBehaviour, Shootable
     public void OnDrawGizmos()
     {
         //Alert when shot radius
-        Handles.color = Color.cyan - new Color(0, 0, 0, 0.75f);
-        Handles.DrawWireDisc(transform.position, transform.up, alert_when_shot);
+        //Handles.color = Color.cyan - new Color(0, 0, 0, 0.75f);
+        //Handles.DrawWireDisc(transform.position, transform.up, alert_when_shot);
     }
 }
 
