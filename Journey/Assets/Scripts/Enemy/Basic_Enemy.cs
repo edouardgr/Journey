@@ -24,7 +24,8 @@ public class Basic_Enemy : MonoBehaviour, Shootable
 
     private void FixedUpdate()
     {
-        if (target == null) { //Don't interact if no player is detected 
+        if (target == null)
+        { //Don't interact if no player is detected 
             return;
         }
 
@@ -32,9 +33,10 @@ public class Basic_Enemy : MonoBehaviour, Shootable
         transform.position = Vector3.MoveTowards(transform.position, target.position, info.move_speed); //Move towards the target
 
         timer -= Time.deltaTime; //Update timer
-        if(timer <= 0) { //Timer has reached 0, spawn a projectile
+        if (timer <= 0)
+        { //Timer has reached 0, spawn a projectile
             timer = info.projectile_fire_rate; //Reset timer
-            //SHOOT PROJECTILE
+                                               //SHOOT PROJECTILE
             GameObject obj = Instantiate(projectile, transform.GetChild(0).GetChild(0).position, Quaternion.identity, null); //Create projectile //MODIFY
             obj.transform.LookAt(target); //Point projectile to target
             obj.GetComponent<Projectile_Behaviour>().speed = info.projectile_speed; //Set projectile speed
@@ -47,8 +49,10 @@ public class Basic_Enemy : MonoBehaviour, Shootable
     void Update()
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, detection_radius); //Check all entities in sphere
-        foreach(Collider col in cols) { //Cycle through entities
-            if(col.tag == "Player") { //Check if entity is a player
+        foreach (Collider col in cols)
+        { //Cycle through entities
+            if (col.tag == "Player")
+            { //Check if entity is a player
                 target = col.transform; //Set target to entity
                 break; //Stop checking entities
             }
@@ -59,7 +63,8 @@ public class Basic_Enemy : MonoBehaviour, Shootable
     {
         Handles.color = Color.blue;
         Handles.DrawWireDisc(transform.position, transform.up, detection_radius); //Detection radius
-        if(target) {
+        if (target)
+        {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, target.position); //Line to show who the enemy is chasing
         }
@@ -68,13 +73,15 @@ public class Basic_Enemy : MonoBehaviour, Shootable
     public void Damage(int amount, GameObject sender) //Recieve damage
     {
         info.health -= amount; //Deplete enemy health
-        if(info.health <= 0) { //Check if enemy health is below 0
-               if(Wrath_Bar.Can_Be_Modified)
-                    Wrath_Bar.Add_Wrath_Bar(Wrath_To_Add);
+        if (info.health <= 0)
+        { //Check if enemy health is below 0
+            if (Wrath_Bar.Can_Be_Modified)
+                Wrath_Bar.Add_Wrath_Bar(Wrath_To_Add);
 
-               Destroy(gameObject); //Remove enemy from the game            
+            Destroy(gameObject); //Remove enemy from the game            
         }
-        if(!target && sender) { //Check if enemy is not currently chasing a target
+        if (!target && sender)
+        { //Check if enemy is not currently chasing a target
             timer = info.projectile_fire_rate; //Initilize timer
             target = sender.transform; //Set the target to chase
         }
