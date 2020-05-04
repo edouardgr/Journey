@@ -3,7 +3,9 @@ guid: db1cc9495023e164086a3fb2f3e35600
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - arena_center: {instanceID: 0}
+  - key: {fileID: 7358479149022210569, guid: fe5ecab9999456644a62938ad7dd297f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
