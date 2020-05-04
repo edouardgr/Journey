@@ -93,6 +93,7 @@ public class Wrath_Bar_Behav : MonoBehaviour
      }
      void Enable_RapidFire(Weapon_Manager WM)
      {
+          transform.GetChild(4).gameObject.SetActive(true);
 
           int Max_Index = WM.max_index;
 
@@ -101,6 +102,7 @@ public class Wrath_Bar_Behav : MonoBehaviour
      }
      void Disable_RapidFire(Weapon_Manager WM)
      {
+          transform.GetChild(4).gameObject.SetActive(false);
           int Max_Index = WM.max_index;
 
           for (int i = 0; i < Max_Index; i++) //Go through each weapon and set the shooting speed to normal
@@ -108,6 +110,7 @@ public class Wrath_Bar_Behav : MonoBehaviour
      }
      void Enable_BigDamage(Weapon_Manager WM)
      {
+          transform.GetChild(3).gameObject.SetActive(true);
           int Max_Index = WM.max_index;
 
           for (int i = 0; i < Max_Index; i++) //Go through each weapon and set the shooting damage to 2x
@@ -117,6 +120,7 @@ public class Wrath_Bar_Behav : MonoBehaviour
      }
      void Disable_BigDamage(Weapon_Manager WM)
      {
+          transform.GetChild(3).gameObject.SetActive(false);
           int Max_Index = WM.max_index;
 
           for (int i = 0; i < Max_Index; i++) //Go through each weapon and set the shooting damage to normal
@@ -124,10 +128,12 @@ public class Wrath_Bar_Behav : MonoBehaviour
      }
      void Enable_SuperAccuracy()
      {
+          transform.GetChild(5).gameObject.SetActive(true);
           Player.GetComponent<Weapon_Shooter>().perfect_aim = true;
      }
      void Disable_SuperAccuracy()
      {
+          transform.GetChild(5).gameObject.SetActive(false);
           Player.GetComponent<Weapon_Shooter>().perfect_aim = false;
 
      }
