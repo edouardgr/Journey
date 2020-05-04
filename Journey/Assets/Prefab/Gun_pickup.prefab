@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2800720649936405806}
+  - component: {fileID: 2800720649936405803}
   - component: {fileID: 2800720649936405807}
-  - component: {fileID: 1255088714}
   m_Layer: 0
   m_Name: Gun_pickup
   m_TagString: Untagged
@@ -32,6 +32,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2800720649936405803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800720649936405802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e31df4d2d1cfa4bb9d806302b4bbfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 0}
+  rotation_speed: 2
 --- !u!135 &2800720649936405807
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -45,21 +59,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1255088714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2800720649936405802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdb01bf175e7d964fad1236c1961db51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: -927199367670048503, guid: c17023cd466716449a254f62c1ddeba9, type: 3}
-  rotation_speed: 2
-  frequency: 4
-  amplitude: 0.25
-  health: 50
-  sound: {fileID: 8300000, guid: 9271073667392214f8d47c13b532f599, type: 3}
