@@ -15,6 +15,7 @@ public class HealthPickup : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake() {
+        if(weapon == null) { return; }
         Instantiate(weapon, transform); //Create the weapon object
         origin = transform.position; //Set the origin of weapon
     }

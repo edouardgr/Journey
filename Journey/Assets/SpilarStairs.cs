@@ -12,7 +12,10 @@ public class SpilarStairs : MonoBehaviour
     public float origin_y;
     public float stair_step_offset; //Height of each step
 
-    // Update is called once per frame
+    private void Start() {
+        origin_y = transform.position.y + 0.2f;    
+    }
+
     void Update()
     {
         if(!play_ani) {
