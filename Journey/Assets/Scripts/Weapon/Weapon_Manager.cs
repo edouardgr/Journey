@@ -10,6 +10,8 @@ public class Weapon_Manager : MonoBehaviour
     public Weapon_Info info = null;
     //float switch_delay = 0.5f; //Delay between switching guns, prevents quick spamming //FUTURE IDEA
     bool weapons_enabled = true;
+    public AudioSource audio_source; //Play gun sounds
+    public AudioClip switch_sound, pickup;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +81,7 @@ public class Weapon_Manager : MonoBehaviour
         gun_pivot.transform.GetChild(curr_index).gameObject.SetActive(true); //Set the current index child to show
         gun_pivot.GetComponent<Animator>().Play("Weapon_load"); //Play equiping animation for selected gun
         info = gun_pivot.transform.GetChild(_index).GetComponent<Weapon_Info>(); //Save the info attached to the selected weapon
+        PlaySwitchSound();
     }
 
     public void disable_weapons()
@@ -93,5 +96,15 @@ public class Weapon_Manager : MonoBehaviour
     {
         switch_weapon(curr_index);
         weapons_enabled = true;
+    }
+
+    public void PlaySwitchSound() {
+        audio_source.clip = switch_sound;
+        audio_source.Play();
+    }
+
+    public void PlayPickupSound() {
+        audio_source.clip = pickup;
+        audio_source.Play();
     }
 }

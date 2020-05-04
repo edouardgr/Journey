@@ -15,10 +15,7 @@ public class Player_Movement1 : MonoBehaviour
      [Header("Swim")]
      public float swim_speed = 12f;
      public float swim_gravity = 3f;
-
      bool is_in_water = false;
-
-     
 
      [Header("Ignore for now")]
      public bool launch = false;
@@ -169,9 +166,10 @@ public class Player_Movement1 : MonoBehaviour
         
      }
 
-    void Respawn() {
+    public void Respawn() {
         transform.position = GameObject.FindGameObjectWithTag("CheckPoint").transform.root.GetComponent<Checkpoint_master>().respawn_point.position;
         GetComponent<Player_Info>().current_health = GetComponent<Player_Info>().max_health;
+        GetComponent<Player_Info>().PlayDeathSound();
     }
 }
 
