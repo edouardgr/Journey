@@ -39,6 +39,7 @@ public class Enemy_Rusher_Behav : Enemy_Arena
             }
 
         } else if(state == Enemy_state.chase) {
+            GetComponent<AudiioQueue>().acitve = true;
             agent.destination = target.position;
             if(Vector3.Distance(transform.position, target.position) <= stopping_distance) { //Get ready to attack target as it in attack range
                 if(Within_angle(transform, target, info)) { //If we are facing the target
@@ -81,10 +82,10 @@ public class Enemy_Rusher_Behav : Enemy_Arena
             //Draw Destination
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(agent.destination, 1f); //Draw Destination
-            Handles.color = Color.blue;
-            Handles.DrawWireDisc(agent.destination, Vector3.up, stopping_distance); //Draw stopping radius
-            Handles.color = Color.red;
-            Handles.DrawWireDisc(transform.position, transform.up, attack_radius);
+            //Handles.color = Color.blue;
+            //Handles.DrawWireDisc(agent.destination, Vector3.up, stopping_distance); //Draw stopping radius
+            //Handles.color = Color.red;
+            //Handles.DrawWireDisc(transform.position, transform.up, attack_radius);
         }
     }
 

@@ -46,6 +46,8 @@ public class Basic_Enemy : MonoBehaviour, Shootable
     // Update is called once per frame
     void Update()
     {
+        if(target != null) { GetComponent<AudiioQueue>().acitve = true; }
+
         Collider[] cols = Physics.OverlapSphere(transform.position, detection_radius); //Check all entities in sphere
         foreach(Collider col in cols) { //Cycle through entities
             if(col.tag == "Player") { //Check if entity is a player
@@ -57,8 +59,8 @@ public class Basic_Enemy : MonoBehaviour, Shootable
 
     private void OnDrawGizmos()
     {
-        Handles.color = Color.blue;
-        Handles.DrawWireDisc(transform.position, transform.up, detection_radius); //Detection radius
+        //Handles.color = Color.blue;
+        //Handles.DrawWireDisc(transform.position, transform.up, detection_radius); //Detection radius
         if(target) {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, target.position); //Line to show who the enemy is chasing
