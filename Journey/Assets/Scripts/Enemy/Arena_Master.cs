@@ -33,9 +33,11 @@ public class Arena_Master : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(current_enemies.Count < max_enemies && enemy_tickets > 0) {
+        if (current_enemies.Count < max_enemies && enemy_tickets > 0)
+        {
             Vector3 point;
-            if(RandomPoint(out point)) {
+            if (RandomPoint(out point))
+            {
                 GameObject enemy = Instantiate(enemies[0], point, Quaternion.AngleAxis(Random.value * 360, transform.up), null);
                 enemy.GetComponent<Enemy_Arena>().master = this;
                 enemy.GetComponent<Enemy_Arena>().Spawn();
@@ -44,13 +46,17 @@ public class Arena_Master : MonoBehaviour
             }
         }
 
-        if (enemy_tickets <= 0 && current_enemies.Count <= 0) {
+        if (enemy_tickets <= 0 && current_enemies.Count <= 0)
+        {
             Toggle_Gates(false);
         }
 
-        if(despawn_list.Count > 0) {
-            for(int i = 0; i < despawn_list.Count; i++) {
-                if(despawn_list[i].time_dir == 0) {
+        if (despawn_list.Count > 0)
+        {
+            for (int i = 0; i < despawn_list.Count; i++)
+            {
+                if (despawn_list[i].time_dir == 0)
+                {
                     Enemy_Arena ea = despawn_list[i]; //Get reference to (about to be) Destoyed object
                     despawn_list.RemoveAt(i); //Remove from enemy list
                     Destroy(ea.gameObject); //Destroy enemy
@@ -61,15 +67,17 @@ public class Arena_Master : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Handles.color = Color.blue;
-        //Handles.DrawWireDisc(arena_center.position, arena_center.up, arena_distance);
+        Handles.color = Color.blue;
+        Handles.DrawWireDisc(arena_center.position, arena_center.up, arena_distance);
     }
 
     public void Alert_nearby_enemies(Transform origin_point, float radius, Transform target)
     {
         Toggle_Gates(true);
-        for (int i = 0; i < current_enemies.Count; i++) {
-            if(!current_enemies[i].target && Vector3.Distance(current_enemies[i].transform.position, origin_point.transform.position) < radius) {
+        for (int i = 0; i < current_enemies.Count; i++)
+        {
+            if (!current_enemies[i].target && Vector3.Distance(current_enemies[i].transform.position, origin_point.transform.position) < radius)
+            {
                 current_enemies[i].target = target;
                 current_enemies[i].state = Enemy_state.chase;
             }
@@ -78,10 +86,14 @@ public class Arena_Master : MonoBehaviour
 
     public void Toggle_Gates(bool enabled) //False = Open, True = Close
     {
-        foreach (GameObject gate in gates) {
-            if (enabled) {
+        foreach (GameObject gate in gates)
+        {
+            if (enabled)
+            {
                 gate.GetComponent<Gate_Control>().Close_Gate();
-            } else {
+            }
+            else
+            {
                 gate.GetComponent<Gate_Control>().Open_Gate();
             }
         }
@@ -89,15 +101,17 @@ public class Arena_Master : MonoBehaviour
 
     public bool RandomPoint(out Vector3 result) //Shorter version of the RandomPoint Function
     {
-        return RandomPoint(arena_center.position + Vector3.up * 20f, arena_distance, out result);
+        return RandomPoint(arena_center.position, arena_distance, out result);
     }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result) //From unity website
     {
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 30; i++)
+        {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) {
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+            {
                 result = hit.position;
                 return true;
             }
@@ -108,14 +122,16 @@ public class Arena_Master : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player") {
+        if (other.tag == "Player")
+        {
             other.GetComponent<Weapon_Shooter>().current_arena = this;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player") {
+        if (other.tag == "Player")
+        {
             other.GetComponent<Weapon_Shooter>().current_arena = null;
         }
     }
