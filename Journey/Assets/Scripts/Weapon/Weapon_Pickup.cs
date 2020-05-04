@@ -27,10 +27,10 @@ public class Weapon_Pickup : MonoBehaviour
 
     private void OnDrawGizmos() //Used for visual reference
     {
-        //Handles.color = Color.green;
-        //Handles.DrawWireDisc(transform.position, Vector3.up, GetComponent<SphereCollider>().radius); //up
-        //Handles.DrawWireDisc(transform.position, Vector3.right, GetComponent<SphereCollider>().radius); //right
-        //Handles.DrawWireDisc(transform.position, Vector3.forward, GetComponent<SphereCollider>().radius); //forward
+        Handles.color = Color.green;
+        Handles.DrawWireDisc(transform.position, Vector3.up, GetComponent<SphereCollider>().radius); //up
+        Handles.DrawWireDisc(transform.position, Vector3.right, GetComponent<SphereCollider>().radius); //right
+        Handles.DrawWireDisc(transform.position, Vector3.forward, GetComponent<SphereCollider>().radius); //forward
     }
 
     private void OnTriggerEnter(Collider other) //When the player touches weapon
@@ -42,7 +42,6 @@ public class Weapon_Pickup : MonoBehaviour
             if (!info.unlocked) { //Check if weapon has been unlocked yet, prevents weapon switching when already obtained
                 info.unlocked = true; //Enable the currently picked up weapon
                 other.GetComponent<Weapon_Manager>().switch_weapon(weapon_index); //Switch to the pick up weapon
-                other.GetComponent<Weapon_Manager>().PlayPickupSound();
             }
             Destroy(gameObject); //Destroy this object to free up memory
         }
