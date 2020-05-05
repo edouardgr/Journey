@@ -48,11 +48,13 @@ public class Perspective_Puzzle : MonoBehaviour
 
         //HAVE THE PLAYER STOP BEFORE CHECKING IF RIGHT ANGLE
         //Detect spot
+        if (Vector3.Distance(Camera.main.transform.parent.position, points[0].a.position) > 30) { return; }
         bool match = true;
         for(int i = 0; i < points.Length; i++) {
             //Debug.Log(i + ": " + Vector3.Distance(Camera.main.WorldToScreenPoint(points[i].a.position), Camera.main.WorldToScreenPoint(points[i].b.position)));
             Vector3 point_a = Camera.main.WorldToViewportPoint(points[i].a.position);
             Vector3 point_b = Camera.main.WorldToViewportPoint(points[i].b.position);
+            Debug.Log(point_a);
             if (point_a.x < 0 || point_a.x > 1 || point_a.y < 0 || point_a.y > 1 || point_a.z <= 0 || point_b.x < 0 || point_b.x > 1 || point_b.y < 0 || point_b.y > 1 || point_b.z <= 0 ||
                 Vector3.Distance(Camera.main.WorldToScreenPoint(points[i].a.position), Camera.main.WorldToScreenPoint(points[i].b.position)) >= point_dist) {
                 match = false;
