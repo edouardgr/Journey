@@ -11,7 +11,11 @@ public class GameExit : MonoBehaviour
     public Image fade;
 
     private void Update() {
-        if(exit) { SceneManager.LoadScene("MainMenu"); }
+        if(exit) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            SceneManager.LoadScene("MainMenu"); 
+        }
         fade.color = new Color(1, 1, 1, swipeAmount);
     }
     private void OnTriggerEnter(Collider other) {

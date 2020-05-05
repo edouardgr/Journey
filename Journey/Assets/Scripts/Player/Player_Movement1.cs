@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Player_Movement1 : MonoBehaviour
 {
      [Header("Movement")]
@@ -21,6 +21,8 @@ public class Player_Movement1 : MonoBehaviour
      public bool launch = false;
      public Vector3 move_direction = Vector3.zero;
 
+    public bool isGrounded = true;
+
      Vector3 move_direction_water = Vector3.zero;
      CharacterController CC;
 
@@ -31,8 +33,11 @@ public class Player_Movement1 : MonoBehaviour
           Cursor.lockState = CursorLockMode.Locked;
      }
 
-     void FixedUpdate()
+    void FixedUpdate()
      {
+        //isGrounded = Physics.OverlapSphere(transform.position - transform.up * 0.8f, 0.4f).Length > 2;
+        //Debug.Log(Physics.OverlapSphere(transform.position - transform.up * 0.8f, 0.4f).Length);
+
         if(!is_enabled) {
             return;
         }
@@ -79,6 +84,11 @@ public class Player_Movement1 : MonoBehaviour
      }
      void Update()
      {
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1); 
+        }
      
           if (is_in_water)
           {
